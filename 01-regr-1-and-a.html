@@ -8,20 +8,30 @@
 <meta name="generator" content="pandoc" />
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
+
+
+
 <title>Regression Analysis Past Questions and Answers</title>
 
+<script src="01-regr-q-and-a_files/header-attrs-2.30/header-attrs.js"></script>
+<script src="01-regr-q-and-a_files/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<!-- jQuery first, then Bootstrap -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css" rel="stylesheet" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-
-<!-- Google Fonts: Source Serif 4 for body (highly readable academic feel) + DM Sans for UI -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,400&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="01-regr-q-and-a_files/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="01-regr-q-and-a_files/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="01-regr-q-and-a_files/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="01-regr-q-and-a_files/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="01-regr-q-and-a_files/navigation-1.1/tabsets.js"></script>
+<link href="01-regr-q-and-a_files/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="01-regr-q-and-a_files/highlightjs-9.12.0/highlight.js"></script>
 
 <style type="text/css">
   code{white-space: pre-wrap;}
@@ -30,7 +40,7 @@
   div.column{display: inline-block; vertical-align: top; width: 50%;}
   div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   ul.task-list{list-style: none;}
-</style>
+    </style>
 
 <style type="text/css">code{white-space: pre;}</style>
 <script type="text/javascript">
@@ -43,323 +53,120 @@ if (window.hljs) {
 }
 </script>
 
-<style type="text/css">
 
-  /* ─── CSS Variables ─────────────────────────────────────── */
-  :root {
-    --red-banner:    #c0222e;
-    --navy-banner:   #0d2147;
-    --body-bg:       #f9f7f4;
-    --card-bg:       #ffffff;
-    --text-main:     #1a1a2e;
-    --text-muted:    #5a5a72;
-    --accent-gold:   #c8973a;
-    --border:        #e2ddd6;
-    --question-bg:   #fff8f0;
-    --solution-bg:   #f0f4ff;
-    --font-body:     'Source Serif 4', Georgia, serif;
-    --font-ui:       'DM Sans', sans-serif;
-  }
 
-  /* ─── Reset & Base ──────────────────────────────────────── */
-  *, *::before, *::after { box-sizing: border-box; }
 
-  html { scroll-behavior: smooth; }
 
-  body {
-    font-family: var(--font-body);
-    font-size: 17px;
-    line-height: 1.75;
-    color: var(--text-main);
-    background-color: var(--body-bg);
-    margin: 0;
-    padding: 0;
-  }
 
-  /* ─── TOP RED BANNER ────────────────────────────────────── */
-  #top-banner {
-    background: var(--red-banner);
-    background-image: linear-gradient(135deg, #a81823 0%, #c0222e 50%, #d42f3c 100%);
-    color: #fff;
-    text-align: center;
-    padding: 18px 24px 14px;
-    font-family: var(--font-ui);
-    position: relative;
-    overflow: hidden;
-  }
 
-  #top-banner::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: repeating-linear-gradient(
-      -55deg,
-      transparent,
-      transparent 8px,
-      rgba(255,255,255,0.04) 8px,
-      rgba(255,255,255,0.04) 16px
-    );
-    pointer-events: none;
-  }
 
-  #top-banner .banner-title {
-    font-size: 1.35rem;
-    font-weight: 600;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    margin: 0 0 2px;
-  }
 
-  #top-banner .banner-sub {
-    font-size: 0.85rem;
-    opacity: 0.85;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    margin: 0;
-  }
-
-  /* ─── PAGE TITLE ────────────────────────────────────────── */
-  #header {
-    background: var(--card-bg);
-    border-bottom: 3px solid var(--accent-gold);
-    padding: 36px 0 28px;
-    text-align: center;
-  }
-
-  #header h1.title {
-    font-family: var(--font-body);
-    font-size: 2rem;
-    font-weight: 600;
-    color: var(--navy-banner);
-    margin: 0;
-    letter-spacing: -0.01em;
-  }
-
-  /* ─── MAIN CONTAINER ────────────────────────────────────── */
-  .main-container {
-    max-width: 860px;
-    margin: 0 auto;
-    padding: 36px 24px 60px;
-  }
-
-  img { max-width: 100%; }
-
-  /* ─── HEADINGS ──────────────────────────────────────────── */
-  h1 { font-size: 2rem; }
-  h1.title { font-size: 2rem; }
-  h2 { font-size: 1.6rem; }
-  h3 {
-    font-size: 1.15rem;
-    font-family: var(--font-ui);
-    font-weight: 600;
-    letter-spacing: 0.02em;
-    text-transform: uppercase;
-    margin-top: 0;
-    margin-bottom: 16px;
-  }
-  h4 { font-size: 1.1rem; }
-  h5 { font-size: 1rem; }
-  h6 { font-size: 0.9rem; }
-
-  /* ─── QUESTION / SOLUTION CARDS ────────────────────────── */
-  .section {
-    border-radius: 8px;
-    padding: 28px 32px;
-    margin-bottom: 24px;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.07);
-  }
-
-  /* Question blocks */
-  div[id^="question-"] {
-    background: var(--question-bg);
-    border-left: 4px solid var(--red-banner);
-  }
-
-  div[id^="question-"] h3 {
-    color: var(--red-banner);
-  }
-
-  /* Solution blocks */
-  div[id^="solution"] {
-    background: var(--solution-bg);
-    border-left: 4px solid var(--navy-banner);
-  }
-
-  div[id^="solution"] h3 {
-    color: var(--navy-banner);
-  }
-
-  /* ─── HORIZONTAL RULE ───────────────────────────────────── */
-  hr {
-    border: none;
-    border-top: 2px dashed var(--border);
-    margin: 8px 0 0;
-  }
-
-  /* ─── TABLES ────────────────────────────────────────────── */
-  table {
-    font-family: var(--font-ui);
-    font-size: 0.92rem;
-    width: 100%;
-    border-collapse: collapse;
-    margin: 20px 0;
-    background: var(--card-bg);
-    border-radius: 6px;
-    overflow: hidden;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
-  }
-
-  caption {
-    font-family: var(--font-ui);
-    font-size: 0.82rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.07em;
-    color: var(--text-muted);
-    padding: 8px 0 4px;
-    caption-side: top;
-    text-align: left;
-  }
-
-  thead tr {
-    background: var(--navy-banner);
-    color: #fff;
-  }
-
-  thead th {
-    padding: 10px 14px;
-    font-weight: 500;
-    text-align: left;
-    font-size: 0.85rem;
-    letter-spacing: 0.03em;
-  }
-
-  tbody tr:nth-child(even) {
-    background-color: #f3f5fb;
-  }
-
-  tbody tr:last-child {
-    background-color: #e8eaf4;
-    font-weight: 600;
-  }
-
-  tbody td {
-    padding: 9px 14px;
-    border-bottom: 1px solid var(--border);
-    vertical-align: middle;
-  }
-
-  /* Bootstrap table override */
-  .table-condensed > tbody > tr > td,
-  .table-condensed > thead > tr > th {
-    padding: 9px 14px;
-  }
-
-  /* ─── MATH ──────────────────────────────────────────────── */
-  .math.display {
-    overflow-x: auto;
-    padding: 4px 0;
-  }
-
-  /* ─── INLINE CODE ───────────────────────────────────────── */
-  code {
-    font-size: 0.88em;
-    color: #c0222e;
-    background-color: rgba(192, 34, 46, 0.07);
-    padding: 1px 5px;
-    border-radius: 3px;
-  }
-
-  pre:not([class]) {
-    background-color: #f4f4f4;
-    border-left: 3px solid var(--accent-gold);
-    padding: 14px 18px;
-    border-radius: 4px;
-    overflow-x: auto;
-  }
-
-  /* ─── ORDERED LIST styling ──────────────────────────────── */
-  ol {
-    padding-left: 1.4em;
-  }
-
-  ol li {
-    margin-bottom: 8px;
-  }
-
-  /* ─── BOXED EQUATIONS (MathJax \boxed) ─────────────────── */
-  .boxed, mjx-container[jax="CHTML"][display="true"] {
-    margin: 1em 0;
-  }
-
-  /* ─── BOTTOM NAVY BANNER ────────────────────────────────── */
-  #bottom-banner {
-    background: var(--navy-banner);
-    background-image: linear-gradient(135deg, #091833 0%, #0d2147 60%, #122a5a 100%);
-    color: rgba(255,255,255,0.88);
-    text-align: center;
-    padding: 22px 24px;
-    font-family: var(--font-ui);
-    font-size: 0.85rem;
-    letter-spacing: 0.04em;
-    position: relative;
-    overflow: hidden;
-  }
-
-  #bottom-banner::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: repeating-linear-gradient(
-      55deg,
-      transparent,
-      transparent 10px,
-      rgba(255,255,255,0.025) 10px,
-      rgba(255,255,255,0.025) 20px
-    );
-    pointer-events: none;
-  }
-
-  #bottom-banner p {
-    margin: 4px 0;
-    position: relative;
-  }
-
-  #bottom-banner .footer-title {
-    font-size: 0.95rem;
-    font-weight: 600;
-    color: #fff;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-  }
-
-  /* ─── Responsive tweaks ─────────────────────────────────── */
-  @media (max-width: 640px) {
-    .section { padding: 20px 18px; }
-    #header h1.title { font-size: 1.4rem; }
-    body { font-size: 15px; }
-  }
-
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
 </style>
+
+
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
 
 </head>
 
 <body>
 
-<!-- TOP RED BANNER -->
-<div id="top-banner">
-  <p class="banner-title">Anon Analytica</p>
-  <p class="banner-sub">Study Resources &amp; Past Examination Questions</p>
-</div>
-
-<!-- PAGE TITLE -->
-<div id="header">
-  <h1 class="title toc-ignore">Regression Analysis Past Questions and Answers</h1>
-</div>
 
 <div class="container-fluid main-container">
 
-<div id="question-1" class="section level3 section">
+
+
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">Regression Analysis Past Questions and
+Answers</h1>
+
+</div>
+
+
+<div id="question-1" class="section level3">
 <h3>Question 1</h3>
 <p>A study was performed to investigate the shear strength of soil <span
 class="math inline">\((y)\)</span> as it related to depth in feet <span
@@ -368,7 +175,7 @@ class="math inline">\((x_2)\)</span>. Ten observations were collected
 and the following summary quantities obtained: <span
 class="math display">\[\begin{equation*}
      n=10, \sum x_{i1} = 123, \sum x_{i2} = 453, \sum x^2_{i1} = 4200.9,
-     \sum x^2_{i2} = 21729,  \\
+     \sum x^2_{i2} = 21729,  \newline
      \sum x_{i1}x^2_{i2} = 12252, \sum y_{i1} = 1816,
      \sum x_{i1}y_i = 43450.8, \sum x_{i2}y_i = 104636.8
      \end {equation*}\]</span></p>
@@ -377,7 +184,7 @@ model: <span class="math inline">\(y = \beta_0 + \beta_1 x_1 + \beta_1
 x_2 + \epsilon\)</span></p>
 <p>Estimate the parameters in the above model.</p>
 </div>
-<div id="solution" class="section level3 section">
+<div id="solution" class="section level3">
 <h3>Solution</h3>
 <p>In the question above, the variables in the normal equation of the
 regression model have already been given <span
@@ -488,7 +295,7 @@ class="math inline">\(y = 56.176 + 2.995x_1 + 1.995x_2 +
 \epsilon\)</span></p>
 <hr />
 </div>
-<div id="question-2" class="section level3 section">
+<div id="question-2" class="section level3">
 <h3>Question 2</h3>
 <ol style="list-style-type: lower-alpha">
 <li><p>Given a Non-linear regression form of <span
@@ -524,7 +331,7 @@ Explain how to estimate the model parameter estimates</p></li>
 <p>Estimate the model <span class="math inline">\(y_1 = \beta_0
 e^{\beta_1x_1 +\beta_2x_2}\)</span></p>
 </div>
-<div id="solution-1" class="section level3 section">
+<div id="solution-1" class="section level3">
 <h3>Solution</h3>
 <p>In this case, the first step is to linearise the non-linear
 regression form by taking the natural log of both sides of the
@@ -671,7 +478,7 @@ class="math inline">\(\Rightarrow y_i =  836.310 e^{0.026x_{i1} -
 0.001x_{i2}}\)</span></p>
 <hr />
 </div>
-<div id="question-3" class="section level3 section">
+<div id="question-3" class="section level3">
 <h3>Question 3</h3>
 <ol style="list-style-type: lower-alpha">
 <li>A study was made to determine the stirring rate on the amount of
@@ -706,7 +513,7 @@ following data</li>
 \bar{x}) + \epsilon_i\)</span> was proposed. Obtain the parameter
 estimates.</p>
 </div>
-<div id="solution-2" class="section level3 section">
+<div id="solution-2" class="section level3">
 <h3>Solution</h3>
 <p>Given the proposed model <span class="math inline">\(y_i = \beta_0
 +\beta_1(x - \bar{x}) + \epsilon\)</span> Firstly, we generate the
@@ -864,12 +671,12 @@ class="math display">\[\begin{align*}
 \colon y_i = 11.628 + 0.441(x_i - \bar{x})\)</span></p>
 <hr />
 </div>
-<div id="question-4" class="section level3 section">
+<div id="question-4" class="section level3">
 <h3>Question 4</h3>
 <ol style="list-style-type: lower-alpha">
 <li><p>Derive the estimators of <span class="math inline">\(\beta_0 \
 ,\beta_1 \  , \text{and} \ \sigma^2 \quad\)</span> using the method of
-maximum likelihood. Assuming "<span class="math inline">\(n\)</span>"
+maximum likelihood. Assuming “<span class="math inline">\(n\)</span>”
 random variables are jointly independent and each <span
 class="math inline">\(y_i\)</span> is a normal random variable <span
 class="math inline">\(y_i \sim NIID(\beta_0 + \beta_1 x_i; \quad
@@ -922,7 +729,7 @@ regression coefficient at <span class="math inline">\(\alpha =
 </tbody>
 </table>
 </div>
-<div id="solution-3" class="section level3 section">
+<div id="solution-3" class="section level3">
 <h3>Solution</h3>
 <ol style="list-style-type: lower-alpha">
 <li><span class="math inline">\(y_i = \beta_i + \beta_1x_i +
@@ -987,7 +794,7 @@ L(\beta,\sigma^2)
   \sum_{i=1}^{n}
   (y_i - \beta_0 - \beta_1 x_i)^2
 \end{align*}\]</span></p>
-<p>Looks familiar, doesn't it?</p>
+<p>Looks familiar, doesn’t it?</p>
 <p>To derive <span class="math inline">\(\sigma^2\)</span>, we need to
 evaluate <span
 class="math inline">\(\frac{\delta\log(\beta,\sigma^2)}{\delta\sigma^2}\)</span>
@@ -1222,7 +1029,7 @@ n\sum x_iy_i -
 </table>
 <hr />
 </div>
-<div id="question-5" class="section level3 section">
+<div id="question-5" class="section level3">
 <h3>Question 5</h3>
 <p>A study was made to determine the stirring rate on the amount of
 impurity in paint produced by a chemical process. The study yielded the
@@ -1255,7 +1062,7 @@ e_i\)</span> by obtaining the parameter estimates</li>
 <li>Compute the ANOVA to test for the adequacy of the model</li>
 </ol>
 </div>
-<div id="solution-4" class="section level3 section">
+<div id="solution-4" class="section level3">
 <h3>Solution</h3>
 <ol style="list-style-type: lower-alpha">
 <li>Given the model <span class="math inline">\(\colon \quad y_i =
@@ -1517,7 +1324,7 @@ variations in the impurity can be explained by the variations in the
 stirring rate</em></p>
 <hr />
 </div>
-<div id="question-6" class="section level3 section">
+<div id="question-6" class="section level3">
 <h3>Question 6</h3>
 <p>Sidewall panels for the interior of an airplane are formed in a
 1500-ton press. The unit manufacturing cost varies with the production
@@ -1561,7 +1368,7 @@ polynomial may be appropriate (Quadratic model).</p>
 model</li>
 </ol>
 </div>
-<div id="solution-5" class="section level3 section">
+<div id="solution-5" class="section level3">
 <h3>Solution</h3>
 <ol style="list-style-type: lower-alpha">
 <li>A quadratic model is given by the equation <span
@@ -1742,10 +1549,10 @@ class="math display">\[\begin{align*}
     \end{align*}\]</span></p>
 <p><span class="math display">\[
 \therefore \text{The model is given by} \colon \quad  y_i = 1.473 +
-0.318x_i + e_i \] </span></p>
-<br>
-<p><span class = "math display">\[ \text{Parameter estimates} \colon \quad \beta_0 = 1.473 \quad \text{and}
-\quad \beta_1 = 0.113 \]</span></p>
+0.318x_i + e_i \\
+\text{Parameter estimates} \colon \quad \beta_0 = 1.473 \quad \text{and}
+\quad \beta_1 = 0.113
+\]</span></p>
 <table>
 <caption>ANOVA TABLE</caption>
 <colgroup>
@@ -1799,15 +1606,13 @@ variations in the y can be explained by the variations x</em></p>
 the linear model</p>
 </div>
 
-</div><!-- /.main-container -->
 
-<!-- BOTTOM NAVY BANNER -->
-<div id="bottom-banner">
-  <p class="footer-title">Regression Analysis &mdash; Past Questions &amp; Answers</p>
-  <p>For academic use only &nbsp;&bull;&nbsp; Good luck with your studies</p>
+
+
 </div>
 
 <script>
+
 // add bootstrap table styles to pandoc tables
 function bootstrapStylePandocTables() {
   $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
@@ -1815,24 +1620,36 @@ function bootstrapStylePandocTables() {
 $(document).ready(function () {
   bootstrapStylePandocTables();
 });
+
+
 </script>
 
+<!-- tabsets -->
 
-
-<!-- MathJax 3 -->
 <script>
-  window.MathJax = {
-    tex: {
-      inlineMath: [['\\(', '\\)']],
-      displayMath: [['\\[', '\\]']],
-      packages: {'[+]': ['ams']}
-    },
-    options: {
-      skipHtmlTags: ['script','noscript','style','textarea','pre']
-    }
-  };
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
 </script>
-<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script" async></script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "01-regr-q-and-a_files/mathjax-local/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 
 </body>
 </html>
