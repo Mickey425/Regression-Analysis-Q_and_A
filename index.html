@@ -7,10 +7,10 @@
 <meta charset="utf-8" />
 <meta name="generator" content="pandoc" />
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 <title>Regression Analysis Past Questions and Answers</title>
 
-<meta name="viewport" content="width=device-width, initial-scale=1" />
 <!-- jQuery first, then Bootstrap -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
@@ -18,7 +18,7 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css" rel="stylesheet" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
 
-<!-- Google Fonts: Source Serif 4 for body (highly readable academic feel) + DM Sans for UI -->
+<!-- Google Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,400&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
@@ -74,6 +74,8 @@ if (window.hljs) {
     background-color: var(--body-bg);
     margin: 0;
     padding: 0;
+    /* Prevent body-level horizontal overflow */
+    overflow-x: hidden;
   }
 
   /* ─── TOP RED BANNER ────────────────────────────────────── */
@@ -82,10 +84,13 @@ if (window.hljs) {
     background-image: linear-gradient(135deg, #a81823 0%, #c0222e 50%, #d42f3c 100%);
     color: #fff;
     text-align: center;
-    padding: 18px 24px 14px;
+    /* FIX: use padding that shrinks on small screens */
+    padding: clamp(12px, 3vw, 18px) clamp(12px, 4vw, 24px) clamp(10px, 2.5vw, 14px);
     font-family: var(--font-ui);
     position: relative;
     overflow: hidden;
+    /* FIX: ensure banner always spans full width */
+    width: 100%;
   }
 
   #top-banner::before {
@@ -103,53 +108,64 @@ if (window.hljs) {
   }
 
   #top-banner .banner-title {
-    font-size: 1.35rem;
+    /* FIX: fluid font size */
+    font-size: clamp(0.95rem, 3vw, 1.35rem);
     font-weight: 600;
     letter-spacing: 0.04em;
     text-transform: uppercase;
     margin: 0 0 2px;
+    position: relative;
   }
 
   #top-banner .banner-sub {
-    font-size: 0.85rem;
+    /* FIX: fluid font size */
+    font-size: clamp(0.7rem, 2vw, 0.85rem);
     opacity: 0.85;
     letter-spacing: 0.06em;
     text-transform: uppercase;
     margin: 0;
+    position: relative;
   }
 
   /* ─── PAGE TITLE ────────────────────────────────────────── */
   #header {
     background: var(--card-bg);
     border-bottom: 3px solid var(--accent-gold);
-    padding: 36px 0 28px;
+    padding: clamp(20px, 4vw, 36px) clamp(16px, 4vw, 24px) clamp(16px, 3vw, 28px);
     text-align: center;
+    width: 100%;
   }
 
   #header h1.title {
     font-family: var(--font-body);
-    font-size: 2rem;
+    /* FIX: fluid font size */
+    font-size: clamp(1.2rem, 4vw, 2rem);
     font-weight: 600;
     color: var(--navy-banner);
     margin: 0;
     letter-spacing: -0.01em;
+    /* Allow title to wrap on small screens */
+    word-wrap: break-word;
   }
 
   /* ─── MAIN CONTAINER ────────────────────────────────────── */
   .main-container {
     max-width: 860px;
     margin: 0 auto;
-    padding: 36px 24px 60px;
+    /* FIX: fluid padding */
+    padding: clamp(20px, 4vw, 36px) clamp(12px, 4vw, 24px) clamp(40px, 6vw, 60px);
+    /* Prevent container itself from causing overflow */
+    overflow-x: hidden;
   }
 
   img { max-width: 100%; }
 
   /* ─── HEADINGS ──────────────────────────────────────────── */
-  h1 { font-size: 2rem; }
-  h1.title { font-size: 2rem; }
-  h2 { font-size: 1.6rem; }
+  h1 { font-size: clamp(1.4rem, 4vw, 2rem); }
+  h1.title { font-size: clamp(1.2rem, 4vw, 2rem); }
+  h2 { font-size: clamp(1.2rem, 3.5vw, 1.6rem); }
   h3 {
-    font-size: 1.15rem;
+    font-size: clamp(0.9rem, 2.5vw, 1.15rem);
     font-family: var(--font-ui);
     font-weight: 600;
     letter-spacing: 0.02em;
@@ -164,9 +180,14 @@ if (window.hljs) {
   /* ─── QUESTION / SOLUTION CARDS ────────────────────────── */
   .section {
     border-radius: 8px;
-    padding: 28px 32px;
+    /* FIX: fluid padding */
+    padding: clamp(16px, 3vw, 28px) clamp(14px, 3.5vw, 32px);
     margin-bottom: 24px;
     box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+    /* FIX: prevent cards from causing overflow */
+    overflow: hidden;
+    /* FIX: ensure card never exceeds viewport */
+    max-width: 100%;
   }
 
   /* Question blocks */
@@ -196,17 +217,29 @@ if (window.hljs) {
     margin: 8px 0 0;
   }
 
-  /* ─── TABLES ────────────────────────────────────────────── */
+  /* ─── TABLES ─────────────────────────────────────────────── */
+  /* FIX: wrap tables so they scroll horizontally on small screens */
+  .table-responsive-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    margin: 20px 0;
+    border-radius: 6px;
+  }
+
   table {
     font-family: var(--font-ui);
     font-size: 0.92rem;
     width: 100%;
     border-collapse: collapse;
-    margin: 20px 0;
+    /* Remove outer margin since wrapper handles spacing */
+    margin: 0;
     background: var(--card-bg);
     border-radius: 6px;
     overflow: hidden;
     box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    /* Prevent table from collapsing below its natural min-width */
+    min-width: 320px;
   }
 
   caption {
@@ -232,6 +265,7 @@ if (window.hljs) {
     text-align: left;
     font-size: 0.85rem;
     letter-spacing: 0.03em;
+    white-space: nowrap;
   }
 
   tbody tr:nth-child(even) {
@@ -255,10 +289,35 @@ if (window.hljs) {
     padding: 9px 14px;
   }
 
-  /* ─── MATH ──────────────────────────────────────────────── */
-  .math.display {
+  /* ─── MATH — KEY FIX ────────────────────────────────────── */
+  /*
+   * Wrap every display-math block so that wide equations scroll
+   * horizontally instead of overflowing the card / page.
+   */
+  .math-scroll-wrapper {
+    width: 100%;
     overflow-x: auto;
-    padding: 4px 0;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 3px;
+    margin: 0.25em 0;
+  }
+
+  /* MathJax 3 renders display math inside <mjx-container display="true"> */
+  mjx-container[display="true"] {
+    /* Remove MathJax's own overflow behaviour so our wrapper controls it */
+    overflow-x: visible !important;
+    /* Ensure the container doesn't force the card to widen */
+    max-width: none;
+    display: block;
+  }
+
+  /* Legacy / fallback for .math.display spans */
+  .math.display {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding: 4px 0 6px;
   }
 
   /* ─── INLINE CODE ───────────────────────────────────────── */
@@ -268,6 +327,8 @@ if (window.hljs) {
     background-color: rgba(192, 34, 46, 0.07);
     padding: 1px 5px;
     border-radius: 3px;
+    /* Allow inline code to wrap so it never overflows */
+    word-break: break-word;
   }
 
   pre:not([class]) {
@@ -287,23 +348,20 @@ if (window.hljs) {
     margin-bottom: 8px;
   }
 
-  /* ─── BOXED EQUATIONS (MathJax \boxed) ─────────────────── */
-  .boxed, mjx-container[jax="CHTML"][display="true"] {
-    margin: 1em 0;
-  }
-
   /* ─── BOTTOM NAVY BANNER ────────────────────────────────── */
   #bottom-banner {
     background: var(--navy-banner);
     background-image: linear-gradient(135deg, #091833 0%, #0d2147 60%, #122a5a 100%);
     color: rgba(255,255,255,0.88);
     text-align: center;
-    padding: 22px 24px;
+    /* FIX: fluid padding and full width */
+    padding: clamp(14px, 3vw, 22px) clamp(12px, 4vw, 24px);
     font-family: var(--font-ui);
-    font-size: 0.85rem;
+    font-size: clamp(0.75rem, 2vw, 0.85rem);
     letter-spacing: 0.04em;
     position: relative;
     overflow: hidden;
+    width: 100%;
   }
 
   #bottom-banner::before {
@@ -323,10 +381,12 @@ if (window.hljs) {
   #bottom-banner p {
     margin: 4px 0;
     position: relative;
+    /* Allow text to wrap on small screens */
+    word-wrap: break-word;
   }
 
   #bottom-banner .footer-title {
-    font-size: 0.95rem;
+    font-size: clamp(0.82rem, 2.5vw, 0.95rem);
     font-weight: 600;
     color: #fff;
     text-transform: uppercase;
@@ -335,9 +395,20 @@ if (window.hljs) {
 
   /* ─── Responsive tweaks ─────────────────────────────────── */
   @media (max-width: 640px) {
-    .section { padding: 20px 18px; }
-    #header h1.title { font-size: 1.4rem; }
+    .section { padding: 16px 14px; }
+    #header h1.title { font-size: 1.2rem; }
     body { font-size: 15px; }
+
+    /* Stack table cells on very small screens when content allows */
+    thead th, tbody td {
+      padding: 7px 10px;
+      font-size: 0.82rem;
+    }
+  }
+
+  @media (max-width: 400px) {
+    body { font-size: 14px; }
+    .section { padding: 12px 10px; }
   }
 
 </style>
@@ -365,36 +436,48 @@ if (window.hljs) {
 class="math inline">\((y)\)</span> as it related to depth in feet <span
 class="math inline">\((x_1)\)</span> and the moisture <span
 class="math inline">\((x_2)\)</span>. Ten observations were collected
-and the following summary quantities obtained: <span
-class="math display">\[\begin{equation*}
+and the following summary quantities obtained:</p>
+
+<div class="math-scroll-wrapper">
+<span class="math display">\[\begin{equation*}
      n=10, \sum x_{i1} = 123, \sum x_{i2} = 453, \sum x^2_{i1} = 4200.9,
      \sum x^2_{i2} = 21729,  \\
      \sum x_{i1}x^2_{i2} = 12252, \sum y_{i1} = 1816,
      \sum x_{i1}y_i = 43450.8, \sum x_{i2}y_i = 104636.8
-     \end {equation*}\]</span></p>
+     \end {equation*}\]</span>
+</div>
+
 <p>Set up the least squares normal equation and the matrix form for the
 model: <span class="math inline">\(y = \beta_0 + \beta_1 x_1 + \beta_1
 x_2 + \epsilon\)</span></p>
 <p>Estimate the parameters in the above model.</p>
 </div>
+
 <div id="solution" class="section level3 section">
 <h3>Solution</h3>
 <p>In the question above, the variables in the normal equation of the
-regression model have already been given <span
-class="math display">\[\begin{align*}
-    \sum y_i &amp; = n\beta_0 +\beta_1\sum x_{i1} + \beta_2\sum x_{i2}
+regression model have already been given</p>
+
+<div class="math-scroll-wrapper">
+<span class="math display">\[\begin{align*}
+    \sum y_i & = n\beta_0 +\beta_1\sum x_{i1} + \beta_2\sum x_{i2}
 \\
-    \sum x_{i1}y_i &amp; = x_{i1}\beta_0 +\beta_1\sum x_{i1}^2 +
+    \sum x_{i1}y_i & = x_{i1}\beta_0 +\beta_1\sum x_{i1}^2 +
 \beta_2\sum x_{i1}x_{i2} \\
-    \sum x_{i2}y_i &amp; = x_{i2}\beta_0 +\beta_1\sum x_{i1}x_{i2} +
+    \sum x_{i2}y_i & = x_{i2}\beta_0 +\beta_1\sum x_{i1}x_{i2} +
 \beta_2\sum x_{i2}^2
-  \end{align*}\]</span></p>
+  \end{align*}\]</span>
+</div>
+
 <p>So now we need to write the above systems of equations in matrix form
-for easy evaluation <span class="math display">\[\begin{equation*}
+for easy evaluation</p>
+
+<div class="math-scroll-wrapper">
+<span class="math display">\[\begin{equation*}
     \begin{pmatrix}
-    n &amp; \sum x_{i1} &amp; \sum x_{i2} \\
-    \sum x_{i1} &amp; \sum x_{i1}^2 &amp; \sum x_{i1}x_{i2}\\
-    \sum x_{i2} &amp; \sum x_{i1}x_{i2} &amp; \sum x_{i2}^2
+    n & \sum x_{i1} & \sum x_{i2} \\
+    \sum x_{i1} & \sum x_{i1}^2 & \sum x_{i1}x_{i2}\\
+    \sum x_{i2} & \sum x_{i1}x_{i2} & \sum x_{i2}^2
     \end{pmatrix}
     \begin{pmatrix}
       \beta_0\\
@@ -407,8 +490,11 @@ for easy evaluation <span class="math display">\[\begin{equation*}
       \sum x_{i1}y_i \\
       \sum x_{i2}y_i
     \end{pmatrix}
-\end{equation*}\]</span></p>
-<p><span class="math display">\[\begin{equation*}
+\end{equation*}\]</span>
+</div>
+
+<div class="math-scroll-wrapper">
+<span class="math display">\[\begin{equation*}
 \Rightarrow
   \begin{pmatrix}
       \beta_0\\
@@ -417,9 +503,9 @@ for easy evaluation <span class="math display">\[\begin{equation*}
     \end{pmatrix}
     =
     \begin{pmatrix}
-    n &amp; \sum x_{i1} &amp; \sum x_{i2} \\
-    \sum x_{i1} &amp; \sum x_{i1}^2 &amp; \sum x_{i1}x_{i2}\\
-    \sum x_{i2} &amp; \sum x_{i1}x_{i2} &amp; \sum x_{i2}^2
+    n & \sum x_{i1} & \sum x_{i2} \\
+    \sum x_{i1} & \sum x_{i1}^2 & \sum x_{i1}x_{i2}\\
+    \sum x_{i2} & \sum x_{i1}x_{i2} & \sum x_{i2}^2
     \end{pmatrix}^{-1}
     
   \begin{pmatrix}
@@ -427,9 +513,13 @@ for easy evaluation <span class="math display">\[\begin{equation*}
     \sum x_{i1}y_i \\
     \sum x_{i2}y_i
   \end{pmatrix}
-\end{equation*}\]</span></p>
-<p>Substituting the necessary values <span
-class="math display">\[\begin{align*}
+\end{equation*}\]</span>
+</div>
+
+<p>Substituting the necessary values</p>
+
+<div class="math-scroll-wrapper">
+<span class="math display">\[\begin{align*}
   \Rightarrow
   \begin{pmatrix}
     \beta_0\\
@@ -438,9 +528,9 @@ class="math display">\[\begin{align*}
   \end{pmatrix}
   =
   \begin{pmatrix}
-    10 &amp; 123 &amp; 453 \\
-    123 &amp; 4200.9 &amp; 12252 \\
-    453 &amp; 12252 &amp; 21729
+    10 & 123 & 453 \\
+    123 & 4200.9 & 12252 \\
+    453 & 12252 & 21729
   \end{pmatrix}^{-1}
   
   \begin{pmatrix}
@@ -448,8 +538,11 @@ class="math display">\[\begin{align*}
     43450.8\\
     104636.8\\
   \end{pmatrix}
-\end{align*}\]</span></p>
-<p><span class="math display">\[\begin{equation*}
+\end{align*}\]</span>
+</div>
+
+<div class="math-scroll-wrapper">
+<span class="math display">\[\begin{equation*}
 \Rightarrow
 \begin{pmatrix}
     \beta_0\\
@@ -458,9 +551,9 @@ class="math display">\[\begin{align*}
   \end{pmatrix}
 =
   \begin{pmatrix}
-    0.142 &amp; -0.00695 &amp; 0.000957 \\
-    -0.00695 &amp; -0.0000292 &amp; 0.000161 \\
-    0.000957 &amp; 0.000161 &amp; -0.0000649
+    0.142 & -0.00695 & 0.000957 \\
+    -0.00695 & -0.0000292 & 0.000161 \\
+    0.000957 & 0.000161 & -0.0000649
   \end{pmatrix}
   
   \begin{pmatrix}
@@ -469,7 +562,11 @@ class="math display">\[\begin{align*}
     104636.8\\
   \end{pmatrix}
 
-\end{equation*}\]</span> <span class="math display">\[\begin{equation*}
+\end{equation*}\]</span>
+</div>
+
+<div class="math-scroll-wrapper">
+<span class="math display">\[\begin{equation*}
   \Rightarrow
     \begin{pmatrix}
       \beta_0\\
@@ -482,12 +579,15 @@ class="math display">\[\begin{align*}
       2.995\\
       1.955\\
     \end{pmatrix}
-\end{equation*}\]</span></p>
+\end{equation*}\]</span>
+</div>
+
 <p>Therefore, the correct model for the equation is <span
 class="math inline">\(y = 56.176 + 2.995x_1 + 1.995x_2 +
 \epsilon\)</span></p>
 <hr />
 </div>
+
 <div id="question-2" class="section level3 section">
 <h3>Question 2</h3>
 <ol style="list-style-type: lower-alpha">
@@ -496,61 +596,56 @@ class="math inline">\(y_1 = \beta_0 e^{\beta_1x_1 +\beta_2x_2}\)</span>.
 Explain how to estimate the model parameter estimates</p></li>
 <li><p>Given the data sets</p></li>
 </ol>
+
+<div class="table-responsive-wrapper">
 <table>
 <tbody>
 <tr class="odd">
 <td>Temperature <span class="math inline">\((x_2)\)</span></td>
-<td>120</td>
-<td>110</td>
-<td>80</td>
-<td>60</td>
+<td>120</td><td>110</td><td>80</td><td>60</td>
 </tr>
 <tr class="even">
 <td>Concentration <span class="math inline">\((x_1)\)</span></td>
-<td>2.5</td>
-<td>3.5</td>
-<td>4.0</td>
-<td>5.5</td>
+<td>2.5</td><td>3.5</td><td>4.0</td><td>5.5</td>
 </tr>
 <tr class="odd">
 <td>Yield <span class="math inline">\((y)\)</span></td>
-<td>800</td>
-<td>830</td>
-<td>850</td>
-<td>900</td>
+<td>800</td><td>830</td><td>850</td><td>900</td>
 </tr>
 </tbody>
 </table>
+</div>
+
 <p>Estimate the model <span class="math inline">\(y_1 = \beta_0
 e^{\beta_1x_1 +\beta_2x_2}\)</span></p>
 </div>
+
 <div id="solution-1" class="section level3 section">
 <h3>Solution</h3>
 <p>In this case, the first step is to linearise the non-linear
 regression form by taking the natural log of both sides of the
 equation</p>
+
 <p><span class="math inline">\(\Rightarrow   \ln y_1 = \ln\beta_0 +
 \beta_1x_1 + \beta_2x_2\)</span></p>
-<p><span class="math display">\[\begin{align*}
-      \sum \ln y_1  &amp; = \ln\beta_0 +\beta_1\sum x_{1} + \beta_2\sum
+
+<div class="math-scroll-wrapper">
+<span class="math display">\[\begin{align*}
+      \sum \ln y_1  & = \ln\beta_0 +\beta_1\sum x_{1} + \beta_2\sum
 x_{2} \\
-      \sum x_{1}y_i &amp; = \ln\beta_0\sum x_1 +\beta_1\sum x_{1}^2 +
+      \sum x_{1}y_i & = \ln\beta_0\sum x_1 +\beta_1\sum x_{1}^2 +
 \beta_2\sum x_{1}x_{2} \\
-      \sum x_{2}y_i &amp; = \ln\beta_0\sum x_2 +\beta_1\sum x_1x_2 +
+      \sum x_{2}y_i & = \ln\beta_0\sum x_2 +\beta_1\sum x_1x_2 +
 \beta_2\sum x_{2}^2
-\end{align*}\]</span></p>
+\end{align*}\]</span>
+</div>
+
+<div class="table-responsive-wrapper">
 <table style="width:100%;">
 <caption>Computation table</caption>
 <colgroup>
-<col width="11%" />
-<col width="11%" />
-<col width="11%" />
-<col width="11%" />
-<col width="11%" />
-<col width="11%" />
-<col width="11%" />
-<col width="11%" />
-<col width="11%" />
+<col width="11%" /><col width="11%" /><col width="11%" /><col width="11%" />
+<col width="11%" /><col width="11%" /><col width="11%" /><col width="11%" /><col width="11%" />
 </colgroup>
 <tbody>
 <tr class="odd">
@@ -565,74 +660,43 @@ x_{2} \\
 <td><span class="math inline">\(x_2^2\)</span></td>
 </tr>
 <tr class="even">
-<td>800</td>
-<td>2.5</td>
-<td>120</td>
-<td>6.684</td>
-<td>16.71</td>
-<td>802.08</td>
-<td>6.25</td>
-<td>300</td>
-<td>14400</td>
+<td>800</td><td>2.5</td><td>120</td><td>6.684</td><td>16.71</td>
+<td>802.08</td><td>6.25</td><td>300</td><td>14400</td>
 </tr>
 <tr class="odd">
-<td>830</td>
-<td>3.5</td>
-<td>110</td>
-<td>6.721</td>
-<td>23.5235</td>
-<td>739.31</td>
-<td>585</td>
-<td>12100</td>
-<td>12100</td>
+<td>830</td><td>3.5</td><td>110</td><td>6.721</td><td>23.5235</td>
+<td>739.31</td><td>585</td><td>12100</td><td>12100</td>
 </tr>
 <tr class="even">
-<td>850</td>
-<td>4.0</td>
-<td>80</td>
-<td>6.745</td>
-<td>26.98</td>
-<td>539.6</td>
-<td>16</td>
-<td>320</td>
-<td>6400</td>
+<td>850</td><td>4.0</td><td>80</td><td>6.745</td><td>26.98</td>
+<td>539.6</td><td>16</td><td>320</td><td>6400</td>
 </tr>
 <tr class="odd">
-<td>900</td>
-<td>5.5</td>
-<td>60</td>
-<td>6.802</td>
-<td>37.411</td>
-<td>408.12</td>
-<td>30.25</td>
-<td>166.375</td>
-<td>3600</td>
+<td>900</td><td>5.5</td><td>60</td><td>6.802</td><td>37.411</td>
+<td>408.12</td><td>30.25</td><td>166.375</td><td>3600</td>
 </tr>
 <tr class="even">
 <td><span class="math inline">\(\sum =\)</span> 3380</td>
-<td>15.5</td>
-<td>370</td>
-<td>26.952</td>
-<td>104.6245</td>
-<td>2489.14</td>
-<td>64.75</td>
-<td>1371.375</td>
-<td>36500</td>
+<td>15.5</td><td>370</td><td>26.952</td><td>104.6245</td>
+<td>2489.14</td><td>64.75</td><td>1371.375</td><td>36500</td>
 </tr>
 </tbody>
 </table>
-<p><span class="math display">\[\begin{align*}
+</div>
+
+<div class="math-scroll-wrapper">
+<span class="math display">\[\begin{align*}
   \Rightarrow
   \begin{pmatrix}
     \ln\beta_0\\
     \beta_1\\
     \beta_2\\
   \end{pmatrix}
-  &amp; =
+  & =
   \begin{pmatrix}
-    4 &amp; 15.5 &amp; 370 \\
-    15.5 &amp; 64.75 &amp; 1371.375\\
-    370 &amp; 1371.375 &amp; 36500
+    4 & 15.5 & 370 \\
+    15.5 & 64.75 & 1371.375\\
+    370 & 1371.375 & 36500
   \end{pmatrix}^{-1}
   
   \begin{pmatrix}
@@ -640,37 +704,48 @@ x_{2} \\
     0.026\\
     -0.001\\
   \end{pmatrix} \\
-\end{align*}\]</span></p>
-<p><span class="math display">\[\begin{align*}
+\end{align*}\]</span>
+</div>
+
+<div class="math-scroll-wrapper">
+<span class="math display">\[\begin{align*}
   \Rightarrow
     \begin{pmatrix}
       \ln\beta_0\\
       \beta_1\\
       \beta_2\\
     \end{pmatrix}
-    &amp; =
+    & =
     \begin{pmatrix}
     6.739\\
     0.026\\
     -0.001\\
   \end{pmatrix}
-\end{align*}\]</span> The solution to the systems of equations above
+\end{align*}\]</span>
+</div>
+
+<p>The solution to the systems of equations above
 implies that <span class="math inline">\(\ln(y_1) = (6.739) + 0.026x_1 +
 (-0.001)x_2\)</span></p>
-<p>Note that <span class="math inline">\(\ln\beta_0 =
-6.739\)</span>.</p>
+<p>Note that <span class="math inline">\(\ln\beta_0 = 6.739\)</span>.</p>
 <p>Now we need to convert the linear equation to its original
-exponential form <span class="math display">\[\begin{align*}
-e^{\ln(y_1)} &amp; = e^{(\ln\beta_0 + 0.026x_1 + (-0.001)x_2)} \\
-\Rightarrow y_1 &amp; = e^{\ln\beta_0} e^{0.026x_1 + (-0.001)x_2} \\
-\Rightarrow y_1 &amp; = e^{(6.729)} e^{0.026x_1 - 0.001x_2} \\
-\Rightarrow y_1 &amp; = 836.310 e^{0.026x_1 - 0.001x_2}
-\end{align*}\]</span></p>
+exponential form</p>
+
+<div class="math-scroll-wrapper">
+<span class="math display">\[\begin{align*}
+e^{\ln(y_1)} & = e^{(\ln\beta_0 + 0.026x_1 + (-0.001)x_2)} \\
+\Rightarrow y_1 & = e^{\ln\beta_0} e^{0.026x_1 + (-0.001)x_2} \\
+\Rightarrow y_1 & = e^{(6.729)} e^{0.026x_1 - 0.001x_2} \\
+\Rightarrow y_1 & = 836.310 e^{0.026x_1 - 0.001x_2}
+\end{align*}\]</span>
+</div>
+
 <p>Therefore, the model estimate is <span
 class="math inline">\(\Rightarrow y_i =  836.310 e^{0.026x_{i1} -
 0.001x_{i2}}\)</span></p>
 <hr />
 </div>
+
 <div id="question-3" class="section level3 section">
 <h3>Question 3</h3>
 <ol style="list-style-type: lower-alpha">
@@ -678,192 +753,183 @@ class="math inline">\(\Rightarrow y_i =  836.310 e^{0.026x_{i1} -
 impurity in paint produced by a chemical process. The study yielded the
 following data</li>
 </ol>
+
+<div class="table-responsive-wrapper">
 <table>
 <tbody>
 <tr class="odd">
 <td align="center">Impurity</td>
-<td align="center">8.4</td>
-<td align="center">9.5</td>
-<td align="center">11.8</td>
-<td align="center">10.4</td>
-<td align="center">13.3</td>
-<td align="center">14.8</td>
+<td align="center">8.4</td><td align="center">9.5</td><td align="center">11.8</td>
+<td align="center">10.4</td><td align="center">13.3</td><td align="center">14.8</td>
 <td align="center">13.2</td>
 </tr>
 <tr class="even">
 <td align="center">Stirring Rate</td>
-<td align="center">20</td>
-<td align="center">22</td>
-<td align="center">24</td>
-<td align="center">26</td>
-<td align="center">28</td>
-<td align="center">30</td>
+<td align="center">20</td><td align="center">22</td><td align="center">24</td>
+<td align="center">26</td><td align="center">28</td><td align="center">30</td>
 <td align="center">32</td>
 </tr>
 </tbody>
 </table>
+</div>
+
 <p>The model <span class="math inline">\(y_i = \beta_0 + \beta_1(x_i -
 \bar{x}) + \epsilon_i\)</span> was proposed. Obtain the parameter
 estimates.</p>
 </div>
+
 <div id="solution-2" class="section level3 section">
 <h3>Solution</h3>
 <p>Given the proposed model <span class="math inline">\(y_i = \beta_0
 +\beta_1(x - \bar{x}) + \epsilon\)</span> Firstly, we generate the
-normal equation <span class="math display">\[\begin{align*}
-      \sum y_i &amp; = n\beta_0 + \beta_1 \sum (x_i - \bar{x}) \\
-      \sum y_i (x_i - \bar{x}) &amp; = \beta_0 \sum (x_i - \bar{x})  +
+normal equation</p>
+
+<div class="math-scroll-wrapper">
+<span class="math display">\[\begin{align*}
+      \sum y_i & = n\beta_0 + \beta_1 \sum (x_i - \bar{x}) \\
+      \sum y_i (x_i - \bar{x}) & = \beta_0 \sum (x_i - \bar{x})  +
 \beta_1 \sum {(x_i - \bar{x})}^2
-    \end{align*}\]</span></p>
-<p>The systems of equation is given by <span
-class="math display">\[\begin{align*}
+    \end{align*}\]</span>
+</div>
+
+<p>The systems of equation is given by</p>
+
+<div class="math-scroll-wrapper">
+<span class="math display">\[\begin{align*}
   \Rightarrow
     \begin{pmatrix}
       \sum y_i \\
       \sum y_i (x_i - \bar{x})
     \end{pmatrix}
-    &amp; =
+    & =
     \begin{pmatrix}
-    n &amp; \sum (x_i - \bar{x})\\
-    \sum (x_i - \bar{x}) &amp; \sum {(x_i - \bar{x})}^2
+    n & \sum (x_i - \bar{x})\\
+    \sum (x_i - \bar{x}) & \sum {(x_i - \bar{x})}^2
   \end{pmatrix}
   
   \begin{pmatrix}
     \beta_0\\
     \beta_1
   \end{pmatrix}
-\end{align*}\]</span></p>
-<p><span class="math display">\[\begin{align*}
+\end{align*}\]</span>
+</div>
+
+<div class="math-scroll-wrapper">
+<span class="math display">\[\begin{align*}
   \Rightarrow
     \begin{pmatrix}
       \beta_0\\
       \beta_1
     \end{pmatrix}
-    &amp; =
+    & =
     \begin{pmatrix}
-    n &amp; \sum (x_i - \bar{x})\\
-    \sum (x_i - \bar{x}) &amp; \sum {(x_i - \bar{x})}^2
+    n & \sum (x_i - \bar{x})\\
+    \sum (x_i - \bar{x}) & \sum {(x_i - \bar{x})}^2
   \end{pmatrix}^{-1}
   
   \begin{pmatrix}
     \sum y_i \\
       \sum y_i (x_i - \bar{x})
   \end{pmatrix}
-\end{align*}\]</span></p>
+\end{align*}\]</span>
+</div>
+
+<div class="table-responsive-wrapper">
 <table>
 <caption>Computation table</caption>
 <colgroup>
-<col width="20%" />
-<col width="20%" />
-<col width="20%" />
-<col width="20%" />
-<col width="20%" />
+<col width="20%" /><col width="20%" /><col width="20%" /><col width="20%" /><col width="20%" />
 </colgroup>
 <thead>
 <tr class="header">
 <th align="center"><span class="math inline">\(y_i\)</span></th>
 <th align="center"><span class="math inline">\(x_i\)</span></th>
-<th align="center"><span class="math inline">\((x_i -
-\bar{x})\)</span></th>
-<th align="center"><span class="math inline">\(y_i(x_i -
-\bar{x})\)</span></th>
-<th align="center"><span class="math inline">\((x_i -
-\bar{x})^2\)</span></th>
+<th align="center"><span class="math inline">\((x_i - \bar{x})\)</span></th>
+<th align="center"><span class="math inline">\(y_i(x_i - \bar{x})\)</span></th>
+<th align="center"><span class="math inline">\((x_i - \bar{x})^2\)</span></th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="center">8.4</td>
-<td align="center">70</td>
-<td align="center">-6</td>
-<td align="center">-50.4</td>
-<td align="center">36</td>
+<td align="center">8.4</td><td align="center">70</td><td align="center">-6</td>
+<td align="center">-50.4</td><td align="center">36</td>
 </tr>
 <tr class="even">
-<td align="center">9.5</td>
-<td align="center">22</td>
-<td align="center">-4</td>
-<td align="center">-38</td>
-<td align="center">24</td>
+<td align="center">9.5</td><td align="center">22</td><td align="center">-4</td>
+<td align="center">-38</td><td align="center">24</td>
 </tr>
 <tr class="odd">
-<td align="center">11.8</td>
-<td align="center">24</td>
-<td align="center">-2</td>
-<td align="center">-23.6</td>
-<td align="center">4</td>
+<td align="center">11.8</td><td align="center">24</td><td align="center">-2</td>
+<td align="center">-23.6</td><td align="center">4</td>
 </tr>
 <tr class="even">
-<td align="center">10.4</td>
-<td align="center">26</td>
-<td align="center">0</td>
-<td align="center">0</td>
-<td align="center">0</td>
+<td align="center">10.4</td><td align="center">26</td><td align="center">0</td>
+<td align="center">0</td><td align="center">0</td>
 </tr>
 <tr class="odd">
-<td align="center">13.3</td>
-<td align="center">28</td>
-<td align="center">2</td>
-<td align="center">26.6</td>
-<td align="center">4</td>
+<td align="center">13.3</td><td align="center">28</td><td align="center">2</td>
+<td align="center">26.6</td><td align="center">4</td>
 </tr>
 <tr class="even">
-<td align="center">14.8</td>
-<td align="center">30</td>
-<td align="center">4</td>
-<td align="center">59.2</td>
-<td align="center">16</td>
+<td align="center">14.8</td><td align="center">30</td><td align="center">4</td>
+<td align="center">59.2</td><td align="center">16</td>
 </tr>
 <tr class="odd">
-<td align="center">13.2</td>
-<td align="center">32</td>
-<td align="center">6</td>
-<td align="center">79.2</td>
-<td align="center">36</td>
+<td align="center">13.2</td><td align="center">32</td><td align="center">6</td>
+<td align="center">79.2</td><td align="center">36</td>
 </tr>
 <tr class="even">
 <td align="center"><span class="math inline">\(\sum =\)</span> 81.4</td>
-<td align="center">182</td>
-<td align="center">0</td>
-<td align="center">53</td>
-<td align="center">120</td>
+<td align="center">182</td><td align="center">0</td>
+<td align="center">53</td><td align="center">120</td>
 </tr>
 </tbody>
 </table>
+</div>
+
 <p><span class="math inline">\(\bar{x} = \frac{\sum (x_i)}{n} =
 \frac{182}{7} = 26\)</span></p>
-<p><span class="math display">\[\begin{align*}
+
+<div class="math-scroll-wrapper">
+<span class="math display">\[\begin{align*}
   \Rightarrow
     \begin{pmatrix}
       \beta_0\\
       \beta_1
     \end{pmatrix}
-    &amp; =
+    & =
     \begin{pmatrix}
-    7 &amp; 0\\
-    0 &amp; 120
+    7 & 0\\
+    0 & 120
   \end{pmatrix}^{-1}
   
   \begin{pmatrix}
     81.4 \\
     53
   \end{pmatrix}
-\end{align*}\]</span> <span class="math display">\[\begin{align*}
+\end{align*}\]</span>
+</div>
+
+<div class="math-scroll-wrapper">
+<span class="math display">\[\begin{align*}
   \Rightarrow
     \begin{pmatrix}
       \beta_0\\
       \beta_1
     \end{pmatrix}
-    &amp; =
+    & =
     \begin{pmatrix}
     11.628\\
     0.441
   \end{pmatrix}
-\end{align*}\]</span></p>
+\end{align*}\]</span>
+</div>
+
 <p><span class="math inline">\(\therefore \text{The model is given by}
 \colon y_i = 11.628 + 0.441(x_i - \bar{x})\)</span></p>
 <hr />
 </div>
+
 <div id="question-4" class="section level3 section">
 <h3>Question 4</h3>
 <ol style="list-style-type: lower-alpha">
@@ -878,31 +944,24 @@ class="math inline">\(y_i \sim NIID(\beta_0 + \beta_1 x_i; \quad
 regression coefficient at <span class="math inline">\(\alpha =
 5\%\)</span></p></li>
 </ol>
+
+<div class="table-responsive-wrapper">
 <table>
-<caption>where <span class="math inline">\(F_{tab}(0.05) =
-3.89\)</span></caption>
+<caption>where <span class="math inline">\(F_{tab}(0.05) = 3.89\)</span></caption>
 <colgroup>
-<col width="20%" />
-<col width="20%" />
-<col width="20%" />
-<col width="20%" />
-<col width="20%" />
+<col width="20%" /><col width="20%" /><col width="20%" /><col width="20%" /><col width="20%" />
 </colgroup>
 <thead>
 <tr class="header">
-<th>Source of Variation</th>
-<th>Degree of freedom</th>
-<th>Sum of Squares</th>
-<th>Mean Squares</th>
-<th>F-calculated</th>
+<th>Source of Variation</th><th>Degree of freedom</th>
+<th>Sum of Squares</th><th>Mean Squares</th><th>F-calculated</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td>Regressor (SSR)</td>
 <td><span class="math inline">\(\underline{}\)</span></td>
-<td>5.3025</td>
-<td>5.3025</td>
+<td>5.3025</td><td>5.3025</td>
 <td><span class="math inline">\(\underline{}\)</span></td>
 </tr>
 <tr class="even">
@@ -913,31 +972,38 @@ regression coefficient at <span class="math inline">\(\alpha =
 <td></td>
 </tr>
 <tr class="odd">
-<td>Total</td>
-<td>199</td>
-<td>11.51702</td>
-<td></td>
-<td></td>
+<td>Total</td><td>199</td><td>11.51702</td><td></td><td></td>
 </tr>
 </tbody>
 </table>
 </div>
+</div>
+
 <div id="solution-3" class="section level3 section">
 <h3>Solution</h3>
 <ol style="list-style-type: lower-alpha">
-<li><span class="math inline">\(y_i = \beta_i + \beta_1x_i +
-e_i\)</span></li>
+<li><span class="math inline">\(y_i = \beta_i + \beta_1x_i + e_i\)</span></li>
 </ol>
 <p>The regression model is:</p>
-<p><span class="math display">\[
+
+<div class="math-scroll-wrapper">
+<span class="math display">\[
 y_i = \beta_0 + \beta_1 x_i + \epsilon_i
-\]</span></p>
+\]</span>
+</div>
+
 <p>Assume:</p>
-<p><span class="math display">\[
+
+<div class="math-scroll-wrapper">
+<span class="math display">\[
 y_i \mid x_i \sim N(\beta_0 + \beta_1 x_i, \sigma^2)
-\]</span></p>
+\]</span>
+</div>
+
 <p>The density function is:</p>
-<p><span class="math display">\[
+
+<div class="math-scroll-wrapper">
+<span class="math display">\[
 f(y_i \mid x_i, \beta, \sigma^2)
 =
 \frac{1}{\sqrt{2\pi\sigma^2}}
@@ -945,9 +1011,13 @@ f(y_i \mid x_i, \beta, \sigma^2)
 -\frac{1}{2}
 \frac{(y_i - \beta_0 - \beta_1 x_i)^2}{\sigma^2}
 \right)
-\]</span></p>
+\]</span>
+</div>
+
 <p>Since the observations are independent, the joint likelihood is:</p>
-<p><span class="math display">\[
+
+<div class="math-scroll-wrapper">
+<span class="math display">\[
 L(\beta,\sigma^2)
 =
 \prod_{i=1}^{n}
@@ -956,9 +1026,13 @@ L(\beta,\sigma^2)
 -\frac{1}{2}
 \frac{(y_i - \beta_0 - \beta_1 x_i)^2}{\sigma^2}
 \right)
-\]</span></p>
+\]</span>
+</div>
+
 <p>This simplifies to:</p>
-<p><span class="math display">\[
+
+<div class="math-scroll-wrapper">
+<span class="math display">\[
 L(\beta,\sigma^2)
 =
 \left(\frac{1}{\sqrt{2\pi\sigma^2}}\right)^n
@@ -967,11 +1041,15 @@ L(\beta,\sigma^2)
 \sum_{i=1}^{n}
 (y_i - \beta_0 - \beta_1 x_i)^2
 \right)
-\]</span></p>
+\]</span>
+</div>
+
 <p>Taking logs:</p>
-<p><span class="math display">\[\begin{align*}
+
+<div class="math-scroll-wrapper">
+<span class="math display">\[\begin{align*}
   L(\beta,\sigma^2)
-  &amp;=
+  &=
   \left(\frac{1}{\sqrt{2\pi\sigma^2}}\right)^n
   \exp\left(
   -\frac{1}{2\sigma^2}
@@ -980,33 +1058,41 @@ L(\beta,\sigma^2)
   \right) \\
   \\
   \log L(\beta,\sigma^2)
-  &amp;=
+  &=
   -\frac{n}{2} \log(2\pi\sigma^2)
   -
   \frac{1}{2\sigma^2}
   \sum_{i=1}^{n}
   (y_i - \beta_0 - \beta_1 x_i)^2
-\end{align*}\]</span></p>
+\end{align*}\]</span>
+</div>
+
 <p>Looks familiar, doesn't it?</p>
 <p>To derive <span class="math inline">\(\sigma^2\)</span>, we need to
 evaluate <span
 class="math inline">\(\frac{\delta\log(\beta,\sigma^2)}{\delta\sigma^2}\)</span>
 and equate it to <span class="math inline">\(0\)</span></p>
-<p><span class="math display">\[\begin{align*}
+
+<div class="math-scroll-wrapper">
+<span class="math display">\[\begin{align*}
   \Rightarrow \frac{\delta\log(\beta,\sigma^2)}{\delta\sigma^2}
-  &amp; = \frac{-n}{2} \cdot \frac{4\pi\sigma}{2\pi\sigma^2}
+  & = \frac{-n}{2} \cdot \frac{4\pi\sigma}{2\pi\sigma^2}
   -\frac{1}{2} \sum
   (y_i - \beta_0 - \beta_1 x_i)^2 \cdot
   \left(\frac{-2}{\sigma^3}
   \right) \\
   
   \Rightarrow \frac{\delta\log(\beta,\sigma^2)}{\delta\sigma^2}
-  &amp; =
+  & =
   -\frac{n}{\sigma} + \sum \frac{(y_i - \beta_0 - \beta_1 x_i)^2
 }{\sigma^3}
-\end{align*}\]</span></p>
-<p>Equating to <span class="math inline">\(0\)</span>: <span
-class="math display">\[\begin{align*}
+\end{align*}\]</span>
+</div>
+
+<p>Equating to <span class="math inline">\(0\)</span>:</p>
+
+<div class="math-scroll-wrapper">
+<span class="math display">\[\begin{align*}
   \Rightarrow -\frac{n}{\sigma} + \sum \frac{(y_i - \beta_0 - \beta_1
 x_i)^2}{\sigma^3}
    =
@@ -1018,155 +1104,258 @@ x_i)^2}{\sigma^3}
   \Rightarrow -n\sigma^2  + \sum (y_i - \beta_0 - \beta_1 x_i)^2
   =
   0 \\
-\end{align*}\]</span></p>
-<p><span class="math display">\[\begin{align*}
+\end{align*}\]</span>
+</div>
+
+<div class="math-scroll-wrapper">
+<span class="math display">\[\begin{align*}
   \Rightarrow -n\sigma^2  
-   &amp; =
+   & =
    -\sum (y_i - \beta_0 - \beta_1 x_i)^2 \\
   
   \Rightarrow \sigma^2  
-   &amp; =
+   & =
   \frac{-\sum (y_i - \beta_0 - \beta_1 x_i)^2}{-n} \\
   
   \Rightarrow \sigma^2  
-   &amp; =
+   & =
   \frac{\sum (y_i - \beta_0 - \beta_1 x_i)^2}{n} \\
-\end{align*}\]</span></p>
-<p><span class="math display">\[
+\end{align*}\]</span>
+</div>
+
+<div class="math-scroll-wrapper">
+<span class="math display">\[
 \boxed  {\Rightarrow \sigma^2  
     =
   \frac{\sum(e_i)^2}{n}
 }
-\]</span> To derive <span class="math inline">\(\beta_0\)</span>, we
-evaluate <span
+\]</span>
+</div>
+
+<p>To derive <span class="math inline">\(\beta_0\)</span>, we evaluate <span
 class="math inline">\(\frac{\delta\log(\beta,\sigma^2)}{\delta\beta_0}\)</span>
 and equate it to <span class="math inline">\(0\)</span></p>
-<p><span class="math display">\[
+
+<div class="math-scroll-wrapper">
+<span class="math display">\[
 \frac{\delta\log(\beta,\sigma^2)}{\delta\beta_0}
 =
 0 - \frac{1}{2\sigma^2} \cdot \sum {(y_i - \beta_0 - \beta_1x_i)}^2
-\]</span> <span class="math display">\[
+\]</span>
+</div>
+
+<div class="math-scroll-wrapper">
+<span class="math display">\[
 \frac{\delta\log(\beta,\sigma^2)}{\delta\beta_0}
 =
 -\frac{1}{2\sigma^2} \cdot 2\sum {(y_i - \beta_0 - \beta_1x_i)}\cdot -1
-\]</span></p>
-<p><span class="math display">\[
-\frac{\delta\log(\beta,\sigma^2)}{\delta\beta_0}
-=
--\frac{1}{2\sigma^2} \cdot 2\sum {(y_i - \beta_0 - \beta_1x_i)}\cdot -1
-\]</span> <span class="math display">\[
+\]</span>
+</div>
+
+<div class="math-scroll-wrapper">
+<span class="math display">\[
 \frac{\delta\log(\beta,\sigma^2)}{\delta\beta_0}
 =
 -\frac{1}{\sigma^2} \cdot\sum {(y_i - \beta_0 - \beta_1x_i)}\cdot -1
-\]</span></p>
-<p><span class="math display">\[
+\]</span>
+</div>
+
+<div class="math-scroll-wrapper">
+<span class="math display">\[
 \frac{\delta\log(\beta,\sigma^2)}{\delta\beta_0}
 =
 -\frac{1}{\sigma^2} \cdot\sum {(-y_i + \beta_0 + \beta_1x_i)}
-\]</span> Equating to <span class="math inline">\(0\)</span> <span
-class="math display">\[
+\]</span>
+</div>
+
+<p>Equating to <span class="math inline">\(0\)</span></p>
+
+<div class="math-scroll-wrapper">
+<span class="math display">\[
 -\frac{1}{\sigma^2} \cdot\sum {(-y_i + \beta_0 + \beta_1x_i)} = 0
-\]</span> <span class="math display">\[
+\]</span>
+</div>
+
+<div class="math-scroll-wrapper">
+<span class="math display">\[
 \Rightarrow
 \sum {(-y_i + \beta_0 + \beta_1x_i)} = 0
-\]</span></p>
-<p><span class="math display">\[\begin{align*}
-  \sum -y_i + \sum\beta_0 + \sum\beta_1x_i &amp; = 0 \\
+\]</span>
+</div>
+
+<div class="math-scroll-wrapper">
+<span class="math display">\[\begin{align*}
+  \sum -y_i + \sum\beta_0 + \sum\beta_1x_i & = 0 \\
   
-  -\sum y_i + n\beta_0 + \beta_1\sum x_i &amp; = 0
-\end{align*}\]</span></p>
-<p><span class="math display">\[
+  -\sum y_i + n\beta_0 + \beta_1\sum x_i & = 0
+\end{align*}\]</span>
+</div>
+
+<div class="math-scroll-wrapper">
+<span class="math display">\[
 \Rightarrow
 n\beta_0  = \sum y_i - \beta_1\sum x_i
-\]</span> <span class="math display">\[\begin{align*}
-  n\beta_0  &amp; = \sum y_i - \beta_1\sum x_i \\
-  \beta_0   &amp; = \frac{\sum y_i}{n} - \beta_1\frac{\sum x_i}{n} \\
-\end{align*}\]</span> <span class="math display">\[
+\]</span>
+</div>
+
+<div class="math-scroll-wrapper">
+<span class="math display">\[\begin{align*}
+  n\beta_0  & = \sum y_i - \beta_1\sum x_i \\
+  \beta_0   & = \frac{\sum y_i}{n} - \beta_1\frac{\sum x_i}{n} \\
+\end{align*}\]</span>
+</div>
+
+<div class="math-scroll-wrapper">
+<span class="math display">\[
 \boxed {\Rightarrow \beta_0 = \bar{y} - \beta_1\bar{x}}
-\]</span></p>
+\]</span>
+</div>
+
 <p>To derive <span class="math inline">\(\beta_1\)</span>, we evaluate
 <span
 class="math inline">\(\frac{\delta\log(\beta,\sigma^2)}{\delta\beta_0}\)</span>
 and equate it to <span class="math inline">\(0\)</span></p>
-<p><span class="math display">\[
+
+<div class="math-scroll-wrapper">
+<span class="math display">\[
 \frac{\delta\log(\beta,\sigma^2)}{\delta\beta_1}
 =
 0 - \frac{1}{2\sigma^2} \cdot \sum {(y_i - \beta_0 - \beta_1x_i)}^2
-\]</span> <span class="math display">\[
+\]</span>
+</div>
+
+<div class="math-scroll-wrapper">
+<span class="math display">\[
 \frac{\delta\log(\beta,\sigma^2)}{\delta\beta_1}
 =
 -\frac{1}{2\sigma^2} \cdot 2\sum {(y_i - \beta_0 - \beta_1x_i)}\cdot
 -x_i
-\]</span></p>
-<p><span class="math display">\[
+\]</span>
+</div>
+
+<div class="math-scroll-wrapper">
+<span class="math display">\[
 \frac{\delta\log(\beta,\sigma^2)}{\delta\beta_1}
 =
 -\frac{1}{2\sigma^2} \cdot 2\sum {(-x_iy_i + x_i\beta_0 + \beta_1x_i^2)}
-\]</span> <span class="math display">\[
+\]</span>
+</div>
+
+<div class="math-scroll-wrapper">
+<span class="math display">\[
 \frac{\delta\log(\beta,\sigma^2)}{\delta\beta_1}
 =
 -\frac{1}{\sigma^2} \cdot \sum (-x_iy_i + x_i\beta_0 + \beta_1x_i^2)
-\]</span></p>
-<p>Equating to <span class="math inline">\(0\)</span> <span
-class="math display">\[
+\]</span>
+</div>
+
+<p>Equating to <span class="math inline">\(0\)</span></p>
+
+<div class="math-scroll-wrapper">
+<span class="math display">\[
 -\frac{1}{\sigma^2} \cdot\sum {(-x_iy_i + x_i\beta_0 + \beta_1x_i^2)} =
 0
-\]</span> <span class="math display">\[
+\]</span>
+</div>
+
+<div class="math-scroll-wrapper">
+<span class="math display">\[
 \sum {(-x_iy_i + x_i\beta_0 + \beta_1x_i^2)} = 0
-\]</span></p>
-<p><span class="math display">\[
+\]</span>
+</div>
+
+<div class="math-scroll-wrapper">
+<span class="math display">\[
   \sum -x_iy_i + \beta_0\sum x_i + \beta_1\sum x_i^2  = 0
-\]</span></p>
-<p><span class="math display">\[
+\]</span>
+</div>
+
+<div class="math-scroll-wrapper">
+<span class="math display">\[
 \beta_1  = \frac{\sum x_iy_i -  \beta_0\sum x_i}{\sum x_i^2}
-\]</span></p>
-<p>Recall that: <span class="math display">\[
+\]</span>
+</div>
+
+<p>Recall that:</p>
+
+<div class="math-scroll-wrapper">
+<span class="math display">\[
 \beta_0    = \frac{\sum y_i}{n} - \beta_1\frac{\sum x_i}{n}
-\]</span> Substituting the value for <span
-class="math inline">\(\beta_0\)</span>: <span class="math display">\[
+\]</span>
+</div>
+
+<p>Substituting the value for <span class="math inline">\(\beta_0\)</span>:</p>
+
+<div class="math-scroll-wrapper">
+<span class="math display">\[
 \beta_1\sum x_i^2  =
 {\sum x_iy_i -
 \left( \frac{\sum y_i}{n} -
 \beta_1\frac{\sum x_i}{n} \right) \cdot \sum x_i}
-\]</span> <span class="math display">\[
+\]</span>
+</div>
+
+<div class="math-scroll-wrapper">
+<span class="math display">\[
 \beta_1\sum x_i^2  =
 {\sum x_iy_i -
 \left( \frac{\sum x_iy_i}{n} -
 \beta_1\frac{({\sum x_i})^2}{n} \right)}
-\]</span></p>
-<p><span class="math display">\[
+\]</span>
+</div>
+
+<div class="math-scroll-wrapper">
+<span class="math display">\[
 \beta_1\sum x_i^2  =
 \sum x_iy_i -
 \left( \frac{\sum x_iy_i}{n} -
 \beta_1\frac{({\sum x_i})^2}{n} \right)
-\]</span></p>
-<p><span class="math display">\[
+\]</span>
+</div>
+
+<div class="math-scroll-wrapper">
+<span class="math display">\[
 \beta_1\sum x_i^2  =
 {\sum x_iy_i -
 \frac{\sum x_iy_i}{n} +
 \beta_1\frac{({\sum x_i})^2}{n} }
-\]</span> Multiply through by <span class="math inline">\(n\)</span>:
+\]</span>
+</div>
+
+<p>Multiply through by <span class="math inline">\(n\)</span>:</p>
+
+<div class="math-scroll-wrapper">
 <span class="math display">\[
 \Rightarrow
 n\beta_1\sum x_i^2  =
 n\sum x_iy_i -
 \sum x_iy_i +
 \beta_1 \left( \sum x_i \right)^2
-\]</span></p>
-<p><span class="math display">\[
+\]</span>
+</div>
+
+<div class="math-scroll-wrapper">
+<span class="math display">\[
 \Rightarrow
 n\beta_1\sum x_i^2 -
 \beta_1 \left( \sum x_i \right)^2 =
 n\sum x_iy_i -
 \sum x_iy_i
-\]</span></p>
-<p><span class="math display">\[
+\]</span>
+</div>
+
+<div class="math-scroll-wrapper">
+<span class="math display">\[
 \Rightarrow
 \beta_1\left( n\sum x_i^2 -
 \left( \sum x_i \right)^2 \right) =
 n\sum x_iy_i -
 \sum x_iy_i
-\]</span> <span class="math display">\[
+\]</span>
+</div>
+
+<div class="math-scroll-wrapper">
+<span class="math display">\[
 \boxed {
 \Rightarrow
 \beta_1 =
@@ -1174,34 +1363,30 @@ n\sum x_iy_i -
 \sum x_iy_i}{ n\sum x_i^2 -
 \left(\sum x_i \right)^2}
 }
-\]</span></p>
+\]</span>
+</div>
+
 <ol start="2" style="list-style-type: lower-alpha">
 <li><em>Confirm the solution to the missing values</em></li>
 </ol>
+
+<div class="table-responsive-wrapper">
 <table>
 <caption>Completed ANOVA Table</caption>
 <colgroup>
-<col width="20%" />
-<col width="20%" />
-<col width="20%" />
-<col width="20%" />
-<col width="20%" />
+<col width="20%" /><col width="20%" /><col width="20%" /><col width="20%" /><col width="20%" />
 </colgroup>
 <thead>
 <tr class="header">
-<th>Source of Variation</th>
-<th>Degree of freedom</th>
-<th>Sum of Squares</th>
-<th>Mean Squares</th>
-<th>F-calculated</th>
+<th>Source of Variation</th><th>Degree of freedom</th>
+<th>Sum of Squares</th><th>Mean Squares</th><th>F-calculated</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td>Regressor (SSR)</td>
 <td><span class="math inline">\(\underline{1}\)</span></td>
-<td>5.3025</td>
-<td>5.3025</td>
+<td>5.3025</td><td>5.3025</td>
 <td><span class="math inline">\(\underline{169.4089}\)</span></td>
 </tr>
 <tr class="even">
@@ -1212,69 +1397,69 @@ n\sum x_iy_i -
 <td></td>
 </tr>
 <tr class="odd">
-<td>Total</td>
-<td>199</td>
-<td>11.51702</td>
-<td></td>
-<td></td>
+<td>Total</td><td>199</td><td>11.51702</td><td></td><td></td>
 </tr>
 </tbody>
 </table>
+</div>
 <hr />
 </div>
+
 <div id="question-5" class="section level3 section">
 <h3>Question 5</h3>
 <p>A study was made to determine the stirring rate on the amount of
 impurity in paint produced by a chemical process. The study yielded the
 following data:</p>
+
+<div class="table-responsive-wrapper">
 <table>
 <tbody>
 <tr class="odd">
 <td>Impurity</td>
-<td>8.4</td>
-<td>9.5</td>
-<td>11.8</td>
-<td>10.4</td>
-<td>13.3</td>
-<td>14.8</td>
+<td>8.4</td><td>9.5</td><td>11.8</td><td>10.4</td><td>13.3</td><td>14.8</td>
 </tr>
 <tr class="even">
 <td>Stirring Rate</td>
-<td>20</td>
-<td>22</td>
-<td>24</td>
-<td>26</td>
-<td>28</td>
-<td>30</td>
+<td>20</td><td>22</td><td>24</td><td>26</td><td>28</td><td>30</td>
 </tr>
 </tbody>
 </table>
+</div>
+
 <ol style="list-style-type: lower-alpha">
 <li>Fit the model <span class="math inline">\(y_i = \beta_0 + \beta_1 +
 e_i\)</span> by obtaining the parameter estimates</li>
 <li>Compute the ANOVA to test for the adequacy of the model</li>
 </ol>
 </div>
+
 <div id="solution-4" class="section level3 section">
 <h3>Solution</h3>
 <ol style="list-style-type: lower-alpha">
 <li>Given the model <span class="math inline">\(\colon \quad y_i =
-\beta_0 + \beta_1 + e_i\)</span> The normal equation becomes: <span
-class="math display">\[\begin{align*}
-  \sum y_i &amp; = n\beta_0 + \beta_1 \sum x_i  \\
-  \sum y_ix_i &amp; = \beta_0 \sum x_i  + \beta_1 \sum (x_i{^2}
-\end{align*}\]</span></li>
+\beta_0 + \beta_1 + e_i\)</span> The normal equation becomes:</li>
 </ol>
-<p>The systems of equations: <span class="math display">\[\begin{align*}
+
+<div class="math-scroll-wrapper">
+<span class="math display">\[\begin{align*}
+  \sum y_i & = n\beta_0 + \beta_1 \sum x_i  \\
+  \sum y_ix_i & = \beta_0 \sum x_i  + \beta_1 \sum (x_i{^2}
+\end{align*}\]</span>
+</div>
+
+<p>The systems of equations:</p>
+
+<div class="math-scroll-wrapper">
+<span class="math display">\[\begin{align*}
   \Rightarrow
     \begin{pmatrix}
       \sum y_i \\
       \sum x_iy_i
     \end{pmatrix}
-    &amp; =
+    & =
     \begin{pmatrix}
-    n &amp; \sum x_i\\
-    \sum x_i &amp; \sum x_i{^2}
+    n & \sum x_i\\
+    \sum x_i & \sum x_i{^2}
   \end{pmatrix}
   
   \begin{pmatrix}
@@ -1287,10 +1472,10 @@ class="math display">\[\begin{align*}
     \beta_0\\
     \beta_1
   \end{pmatrix}
-  &amp; =
+  & =
   \begin{pmatrix}
-    n &amp; \sum x_i\\
-    \sum x_i &amp; \sum x_i{^2}
+    n & \sum x_i\\
+    \sum x_i & \sum x_i{^2}
   \end{pmatrix}^{-1}
   
   \begin{pmatrix}
@@ -1298,225 +1483,194 @@ class="math display">\[\begin{align*}
       \sum x_iy_i
     \end{pmatrix}
   
-\end{align*}\]</span></p>
+\end{align*}\]</span>
+</div>
+
+<div class="table-responsive-wrapper">
 <table>
 <caption>Computation Table</caption>
 <thead>
 <tr class="header">
-<th align="center">Impurity (<span
-class="math inline">\(y\)</span>)</th>
-<th align="center">Stirring rate (<span
-class="math inline">\(x\)</span>)</th>
+<th align="center">Impurity (<span class="math inline">\(y\)</span>)</th>
+<th align="center">Stirring rate (<span class="math inline">\(x\)</span>)</th>
 <th align="center"><span class="math inline">\(x_i^2\)</span></th>
 <th align="center"><span class="math inline">\(x_iy_i\)</span></th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="center">8.4</td>
-<td align="center">20</td>
-<td align="center">400</td>
-<td align="center">168</td>
+<td align="center">8.4</td><td align="center">20</td><td align="center">400</td><td align="center">168</td>
 </tr>
 <tr class="even">
-<td align="center">9.5</td>
-<td align="center">22</td>
-<td align="center">484</td>
-<td align="center">209</td>
+<td align="center">9.5</td><td align="center">22</td><td align="center">484</td><td align="center">209</td>
 </tr>
 <tr class="odd">
-<td align="center">11.8</td>
-<td align="center">24</td>
-<td align="center">576</td>
-<td align="center">283.2</td>
+<td align="center">11.8</td><td align="center">24</td><td align="center">576</td><td align="center">283.2</td>
 </tr>
 <tr class="even">
-<td align="center">10.4</td>
-<td align="center">26</td>
-<td align="center">679</td>
-<td align="center">270.4</td>
+<td align="center">10.4</td><td align="center">26</td><td align="center">679</td><td align="center">270.4</td>
 </tr>
 <tr class="odd">
-<td align="center">13.3</td>
-<td align="center">28</td>
-<td align="center">784</td>
-<td align="center">372.2</td>
+<td align="center">13.3</td><td align="center">28</td><td align="center">784</td><td align="center">372.2</td>
 </tr>
 <tr class="even">
-<td align="center">14.8</td>
-<td align="center">30</td>
-<td align="center">900</td>
-<td align="center">444</td>
+<td align="center">14.8</td><td align="center">30</td><td align="center">900</td><td align="center">444</td>
 </tr>
 <tr class="odd">
 <td align="center"><span class="math inline">\(\sum=\)</span> 68.2</td>
-<td align="center">150</td>
-<td align="center">3820</td>
-<td align="center">1747</td>
+<td align="center">150</td><td align="center">3820</td><td align="center">1747</td>
 </tr>
 </tbody>
 </table>
-<p><span class="math display">\[\begin{align*}
+</div>
+
+<div class="math-scroll-wrapper">
+<span class="math display">\[\begin{align*}
   \Rightarrow
     \begin{pmatrix}
       \beta_0\\
       \beta_1
     \end{pmatrix}
-    &amp; =
+    & =
     \begin{pmatrix}
-    6 &amp; 150\\
-    150 &amp; 3820
+    6 & 150\\
+    150 & 3820
   \end{pmatrix}^{-1}
   
   \begin{pmatrix}
     68.2 \\
     1747
   \end{pmatrix}
-\end{align*}\]</span> <span class="math display">\[\begin{align*}
+\end{align*}\]</span>
+</div>
+
+<div class="math-scroll-wrapper">
+<span class="math display">\[\begin{align*}
   \Rightarrow
     \begin{pmatrix}
       \beta_0\\
       \beta_1
     \end{pmatrix}
-    &amp; =
+    & =
     \begin{pmatrix}
     3.633\\
     0.6
   \end{pmatrix}
-\end{align*}\]</span></p>
-<p><span class="math display">\[
+\end{align*}\]</span>
+</div>
+
+<div class="math-scroll-wrapper">
+<span class="math display">\[
 \therefore \text{The model is given by} \colon \quad  y_i = -3.633 +
-0.6x_i + \epsilon\_i
-\]</span> b. To compute the ANOVA, we need to evaluate the sources of
-variations (Regressor, Residual or Error, and the Total) Recall from the
-partitioning of sum of squares we have that: <span
-class="math display">\[\begin{align*}
-    SST &amp; = SSR + SSE \\
-    \text{where} \quad SST &amp; = \sum {(y_i - \bar{y})}^2 \\
-    SSR &amp; = \sum {(\hat{y_i} - \bar{y})}^2  \\
-    SSE &amp; = \sum {(\hat{y_i} - y)}^2
-      \end{align*}\]</span></p>
+0.6x_i + \epsilon_i
+\]</span>
+</div>
+
+<p>b. To compute the ANOVA, we need to evaluate the sources of
+variations (Regressor, Residual or Error, and the Total). Recall from the
+partitioning of sum of squares we have that:</p>
+
+<div class="math-scroll-wrapper">
+<span class="math display">\[\begin{align*}
+    SST & = SSR + SSE \\
+    \text{where} \quad SST & = \sum {(y_i - \bar{y})}^2 \\
+    SSR & = \sum {(\hat{y_i} - \bar{y})}^2  \\
+    SSE & = \sum {(\hat{y_i} - y)}^2
+      \end{align*}\]</span>
+</div>
+
+<div class="table-responsive-wrapper">
 <table>
 <caption>Computation Table</caption>
 <colgroup>
-<col width="25%" />
-<col width="25%" />
-<col width="25%" />
-<col width="25%" />
+<col width="25%" /><col width="25%" /><col width="25%" /><col width="25%" />
 </colgroup>
 <thead>
 <tr class="header">
 <th align="center"><span class="math inline">\(y\)</span></th>
-<th align="center"><span class="math inline">\({(y -
-\bar{y})}^2\)</span></th>
-<th align="center"><span class="math inline">\({(\hat{y} -
-\bar{y})}^2\)</span></th>
-<th align="center"><span class="math inline">\({(\hat{y} -
-y)}^2\)</span></th>
+<th align="center"><span class="math inline">\({(y - \bar{y})}^2\)</span></th>
+<th align="center"><span class="math inline">\({(\hat{y} - \bar{y})}^2\)</span></th>
+<th align="center"><span class="math inline">\({(\hat{y} - y)}^2\)</span></th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="center">8.4</td>
-<td align="center">8.801</td>
-<td align="center">9</td>
-<td align="center">0.001</td>
+<td align="center">8.4</td><td align="center">8.801</td><td align="center">9</td><td align="center">0.001</td>
 </tr>
 <tr class="even">
-<td align="center">9.5</td>
-<td align="center">3.484</td>
-<td align="center">3.24</td>
-<td align="center">0.004</td>
+<td align="center">9.5</td><td align="center">3.484</td><td align="center">3.24</td><td align="center">0.004</td>
 </tr>
 <tr class="odd">
-<td align="center">11.8</td>
-<td align="center">0.187</td>
-<td align="center">0.36</td>
-<td align="center">1.068</td>
+<td align="center">11.8</td><td align="center">0.187</td><td align="center">0.36</td><td align="center">1.068</td>
 </tr>
 <tr class="even">
-<td align="center">10.4</td>
-<td align="center">0.934</td>
-<td align="center">0.36</td>
-<td align="center">2.454</td>
+<td align="center">10.4</td><td align="center">0.934</td><td align="center">0.36</td><td align="center">2.454</td>
 </tr>
 <tr class="odd">
-<td align="center">13.3</td>
-<td align="center">3.737</td>
-<td align="center">3.24</td>
-<td align="center">0.017</td>
+<td align="center">13.3</td><td align="center">3.737</td><td align="center">3.24</td><td align="center">0.017</td>
 </tr>
 <tr class="even">
-<td align="center">14.8</td>
-<td align="center">11.787</td>
-<td align="center">9.0</td>
-<td align="center">0.187</td>
+<td align="center">14.8</td><td align="center">11.787</td><td align="center">9.0</td><td align="center">0.187</td>
 </tr>
 <tr class="odd">
 <td align="center"><span class="math inline">\(\sum=\)</span> 68.2</td>
-<td align="center">28.933</td>
-<td align="center">25.2</td>
-<td align="center">3.733</td>
+<td align="center">28.933</td><td align="center">25.2</td><td align="center">3.733</td>
 </tr>
 </tbody>
 </table>
+</div>
+
+<div class="table-responsive-wrapper">
 <table>
 <caption>ANOVA Table</caption>
 <colgroup>
-<col width="20%" />
-<col width="20%" />
-<col width="20%" />
-<col width="20%" />
-<col width="20%" />
+<col width="20%" /><col width="20%" /><col width="20%" /><col width="20%" /><col width="20%" />
 </colgroup>
 <thead>
 <tr class="header">
-<th align="center">Source of Variation</th>
-<th align="center">Degree of freedom</th>
-<th align="center">Sum of Squares (SS)</th>
-<th align="center">Mean Squares (MS)</th>
+<th align="center">Source of Variation</th><th align="center">Degree of freedom</th>
+<th align="center">Sum of Squares (SS)</th><th align="center">Mean Squares (MS)</th>
 <th align="center">F-calculated</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="center">Regressor (SSR)</td>
-<td align="center">1</td>
-<td align="center">25.2</td>
-<td align="center">25.2</td>
-<td align="center">27</td>
+<td align="center">Regressor (SSR)</td><td align="center">1</td>
+<td align="center">25.2</td><td align="center">25.2</td><td align="center">27</td>
 </tr>
 <tr class="even">
-<td align="center">Residual (SSE)</td>
-<td align="center">4</td>
-<td align="center">3.73</td>
-<td align="center">0.93</td>
-<td align="center"></td>
+<td align="center">Residual (SSE)</td><td align="center">4</td>
+<td align="center">3.73</td><td align="center">0.93</td><td align="center"></td>
 </tr>
 <tr class="odd">
-<td align="center">Total (SST)</td>
-<td align="center">5</td>
-<td align="center">28.93</td>
-<td align="center"></td>
-<td align="center"></td>
+<td align="center">Total (SST)</td><td align="center">5</td>
+<td align="center">28.93</td><td align="center"></td><td align="center"></td>
 </tr>
 </tbody>
 </table>
+</div>
+
 <p>To determine the accuracy of the model, we evaluate the <span
 class="math inline">\(R^2\)</span> value of the model.</p>
 <p>This value tells us how much of the variations in <span
 class="math inline">\(y\)</span>, the response variable can be explained
 by the variations in <span class="math inline">\(x\)</span>, the
-explanatory variable. <span class="math display">\[\begin{align*}
-    R^2 &amp; = \frac {SSR}{SST} \\
-    R^2 &amp; = \frac{25.2}{28.93} \\
-    R^2 &amp; = 0.87
-  \end{align*}\]</span></p>
+explanatory variable.</p>
+
+<div class="math-scroll-wrapper">
+<span class="math display">\[\begin{align*}
+    R^2 & = \frac {SSR}{SST} \\
+    R^2 & = \frac{25.2}{28.93} \\
+    R^2 & = 0.87
+  \end{align*}\]</span>
+</div>
+
 <p><span class="math inline">\(\Rightarrow \quad\)</span> <em>87% of
 variations in the impurity can be explained by the variations in the
 stirring rate</em></p>
 <hr />
 </div>
+
 <div id="question-6" class="section level3 section">
 <h3>Question 6</h3>
 <p>Sidewall panels for the interior of an airplane are formed in a
@@ -1525,69 +1679,64 @@ lot size. The data shown below give the average cost per unit (in
 hundreds of dollars) for this product(<span
 class="math inline">\(y\)</span>) and the production lot size(<span
 class="math inline">\(x\)</span>). The table is as shown below:</p>
+
+<div class="table-responsive-wrapper">
 <table>
 <tbody>
 <tr class="odd">
 <td><span class="math inline">\(X\)</span></td>
-<td>1.0</td>
-<td>1.0</td>
-<td>2.0</td>
-<td>2.3</td>
-<td>3.3</td>
-<td>3.3</td>
-<td>4.0</td>
-<td>4.0</td>
-<td>4.7</td>
+<td>1.0</td><td>1.0</td><td>2.0</td><td>2.3</td><td>3.3</td>
+<td>3.3</td><td>4.0</td><td>4.0</td><td>4.7</td>
 </tr>
 <tr class="even">
 <td><span class="math inline">\(Y\)</span></td>
-<td>2.3</td>
-<td>1.0</td>
-<td>2.8</td>
-<td>1.8</td>
-<td>1.8</td>
-<td>3.7</td>
-<td>2.6</td>
-<td>2.2</td>
-<td>3.2</td>
+<td>2.3</td><td>1.0</td><td>2.8</td><td>1.8</td><td>1.8</td>
+<td>3.7</td><td>2.6</td><td>2.2</td><td>3.2</td>
 </tr>
 </tbody>
 </table>
+</div>
+
 <p>Given that the way the data follows indicates a second-order
 polynomial may be appropriate (Quadratic model).</p>
 <ol style="list-style-type: lower-alpha">
 <li>Obtain the parameter estimates</li>
-<li>Compare this with the linear case and hence test the adequacy of the
-model</li>
+<li>Compare this with the linear case and hence test the adequacy of the model</li>
 </ol>
 </div>
+
 <div id="solution-5" class="section level3 section">
 <h3>Solution</h3>
 <ol style="list-style-type: lower-alpha">
 <li>A quadratic model is given by the equation <span
-class="math inline">\(y_i = \beta_0 x_i + \beta_2 {x_i}^2 + e_i\)</span>
-.The normal equation now becomes: <span
-class="math display">\[\begin{align*}
-  \sum y_i &amp; = n\beta_0 + \beta_1 \sum x_i + \beta_2 \sum
-{x_i}^2    \\
-  \sum x_iy_i &amp; = \beta_0 \sum x_i + \beta_1\sum {x_i}^2  + \beta_2
-\sum x_i{^3} \\
-  \sum x_i{^2}y_i &amp; = \beta_0 \sum x_i{^2} + \beta_1\sum x_i{^3}  +
-\beta_2 \sum x_i{^4}
-\end{align*}\]</span></li>
+class="math inline">\(y_i = \beta_0 x_i + \beta_2 {x_i}^2 + e_i\)</span>.
+The normal equation now becomes:</li>
 </ol>
-<p><span class="math display">\[\begin{align*}
+
+<div class="math-scroll-wrapper">
+<span class="math display">\[\begin{align*}
+  \sum y_i & = n\beta_0 + \beta_1 \sum x_i + \beta_2 \sum
+{x_i}^2    \\
+  \sum x_iy_i & = \beta_0 \sum x_i + \beta_1\sum {x_i}^2  + \beta_2
+\sum x_i{^3} \\
+  \sum x_i{^2}y_i & = \beta_0 \sum x_i{^2} + \beta_1\sum x_i{^3}  +
+\beta_2 \sum x_i{^4}
+\end{align*}\]</span>
+</div>
+
+<div class="math-scroll-wrapper">
+<span class="math display">\[\begin{align*}
   \Rightarrow
     \begin{pmatrix}
       \beta_0\\
       \beta_1 \\
       \beta_2
     \end{pmatrix}
-    &amp; =
+    & =
     \begin{pmatrix}
-     n &amp;  \sum x_i &amp;  \sum x_i{^2}\\
-     \sum x_i &amp; \sum x_i{^2} &amp; \sum x_i{^3} \\
-     \sum x_i{^2} &amp; \sum x_i{^3} &amp; \sum x_i{^4}
+     n &  \sum x_i &  \sum x_i{^2}\\
+     \sum x_i & \sum x_i{^2} & \sum x_i{^3} \\
+     \sum x_i{^2} & \sum x_i{^3} & \sum x_i{^4}
   \end{pmatrix}^{-1}
   
   \begin{pmatrix}
@@ -1595,23 +1744,25 @@ class="math display">\[\begin{align*}
     \sum x_iy_i \\
     \sum x_i{^2}y_i
   \end{pmatrix}
-\end{align*}\]</span></p>
-<p><em>Make the computation table and confirm the values
-yourself</em></p>
-<p><em>If you are confused on how we got here, check previous similar
-solutions</em></p>
-<p><span class="math display">\[\begin{align*}
+\end{align*}\]</span>
+</div>
+
+<p><em>Make the computation table and confirm the values yourself</em></p>
+<p><em>If you are confused on how we got here, check previous similar solutions</em></p>
+
+<div class="math-scroll-wrapper">
+<span class="math display">\[\begin{align*}
   \Rightarrow
     \begin{pmatrix}
       \beta_0\\
       \beta_1 \\
       \beta_2
     \end{pmatrix}
-    &amp; =
+    & =
     \begin{pmatrix}
-     9 &amp;  25.6 &amp;  87.160 \\
-     25.6 &amp; 87.160 &amp; 352.864 \\
-     87.160 &amp; 352.864 &amp; 1283.136
+     9 &  25.6 &  87.160 \\
+     25.6 & 87.160 & 352.864 \\
+     87.160 & 352.864 & 1283.136
   \end{pmatrix}^{-1}
   
   \begin{pmatrix}
@@ -1619,180 +1770,188 @@ solutions</em></p>
     65.43 \\
     231.405
   \end{pmatrix}
-\end{align*}\]</span> <span class="math display">\[\begin{align*}
+\end{align*}\]</span>
+</div>
+
+<div class="math-scroll-wrapper">
+<span class="math display">\[\begin{align*}
   \Rightarrow
     \begin{pmatrix}
       \beta_0\\
       \beta_1 \\
       \beta_2
     \end{pmatrix}
-    &amp; =
+    & =
     \begin{pmatrix}
     1.785\\
     0.113 \\
     0.028
   \end{pmatrix}
-\end{align*}\]</span></p>
-<p><span class="math display">\[
+\end{align*}\]</span>
+</div>
+
+<div class="math-scroll-wrapper">
+<span class="math display">\[
 \therefore \text{The model is given by} \colon \quad  y_i = 1.783 +
 0.113x_i + 0.028{x_i}^2\\
 \text{Parameter estimates} \colon \quad \beta_0 = 1.785 \quad  \beta_1 =
 0.113 \quad \text{and} \quad \beta_2 = 0.028
-\]</span></p>
+\]</span>
+</div>
+
+<div class="table-responsive-wrapper">
 <table>
 <caption>ANOVA Table</caption>
 <colgroup>
-<col width="20%" />
-<col width="20%" />
-<col width="20%" />
-<col width="20%" />
-<col width="20%" />
+<col width="20%" /><col width="20%" /><col width="20%" /><col width="20%" /><col width="20%" />
 </colgroup>
 <thead>
 <tr class="header">
-<th>Source of Variation</th>
-<th>Degree of Freedom</th>
-<th>Sum of Squares</th>
-<th>Mean Squares</th>
-<th>F-calculated</th>
+<th>Source of Variation</th><th>Degree of Freedom</th>
+<th>Sum of Squares</th><th>Mean Squares</th><th>F-calculated</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>Regressor</td>
-<td>2</td>
-<td>1.02</td>
-<td>0.51</td>
-<td>0.787</td>
+<td>Regressor</td><td>2</td><td>1.02</td><td>0.51</td><td>0.787</td>
 </tr>
 <tr class="even">
-<td>Residual</td>
-<td>6</td>
-<td>3.89</td>
-<td>0.648</td>
-<td></td>
+<td>Residual</td><td>6</td><td>3.89</td><td>0.648</td><td></td>
 </tr>
 <tr class="odd">
-<td>Total</td>
-<td>8</td>
-<td>4.91</td>
-<td></td>
-<td></td>
+<td>Total</td><td>8</td><td>4.91</td><td></td><td></td>
 </tr>
 </tbody>
 </table>
-<p><span class="math display">\[\begin{align*}
-R^2 &amp; = \frac{SSR}{SST} \\
-R^2 &amp; = \frac{1.02}{4.91} \\
-R^2 &amp; = 0.207
-\end{align*}\]</span></p>
+</div>
+
+<div class="math-scroll-wrapper">
+<span class="math display">\[\begin{align*}
+R^2 & = \frac{SSR}{SST} \\
+R^2 & = \frac{1.02}{4.91} \\
+R^2 & = 0.207
+\end{align*}\]</span>
+</div>
+
 <p><span class="math inline">\(\Rightarrow \quad\)</span> <em>20.7% of
 variations in the y can be explained by the variations x</em> <em>This
 is clearly a poor model</em></p>
+
 <ol start="2" style="list-style-type: lower-alpha">
 <li>The linear model is expressed as <span class="math inline">\(y_i =
-\beta_0 + \beta_i \sum x_i^2\)</span>. The normal equations now becomes
-<span class="math inline">\(\colon\)</span> <span
-class="math display">\[\begin{align*}
-\sum y_i &amp; = n\beta_0 + \beta_1 \sum x_i  \\
-\sum y_ix_i &amp; = \beta_0 \sum x_i  + \beta_1 \sum x_i{^2}
-  \end{align*}\]</span></li>
+\beta_0 + \beta_i \sum x_i^2\)</span>. The normal equations now become:</li>
 </ol>
-<p><span class="math display">\[\begin{align*}
+
+<div class="math-scroll-wrapper">
+<span class="math display">\[\begin{align*}
+\sum y_i & = n\beta_0 + \beta_1 \sum x_i  \\
+\sum y_ix_i & = \beta_0 \sum x_i  + \beta_1 \sum x_i{^2}
+  \end{align*}\]</span>
+</div>
+
+<div class="math-scroll-wrapper">
+<span class="math display">\[\begin{align*}
     \Rightarrow
     \begin{pmatrix}
       \beta_0\\
       \beta_1
     \end{pmatrix}
-    &amp; =
+    & =
     \begin{pmatrix}
-      n &amp; \sum x_i\\
-      \sum x_i &amp; \sum x_i^2
+      n & \sum x_i\\
+      \sum x_i & \sum x_i^2
     \end{pmatrix}^{-1}
     \begin{pmatrix}
       \sum x_i  \\
       \sum x_iy_i
     \end{pmatrix}
-    \end{align*}\]</span> <span class="math display">\[\begin{align*}
+    \end{align*}\]</span>
+</div>
+
+<div class="math-scroll-wrapper">
+<span class="math display">\[\begin{align*}
       \Rightarrow
       \begin{pmatrix}
         \beta_0\\
         \beta_1
     \end{pmatrix}
-    &amp; =
+    & =
     \begin{pmatrix}
-    9 &amp; 25.6\\
-    25.6 &amp; 87.160
+    9 & 25.6\\
+    25.6 & 87.160
     \end{pmatrix}^{-1}
     \begin{pmatrix}
     21.4 \\
     65.430
     \end{pmatrix}
-    \end{align*}\]</span> <span class="math display">\[\begin{align*}
+    \end{align*}\]</span>
+</div>
+
+<div class="math-scroll-wrapper">
+<span class="math display">\[\begin{align*}
       \Rightarrow
       \begin{pmatrix}
         \beta_0\\
         \beta_1
     \end{pmatrix}
-    &amp; =
+    & =
     \begin{pmatrix}
       1.473 \\
       0.318
     \end{pmatrix}
-    \end{align*}\]</span></p>
-<p><span class="math display">\[
+    \end{align*}\]</span>
+</div>
+
+<div class="math-scroll-wrapper">
+<span class="math display">\[
 \therefore \text{The model is given by} \colon \quad  y_i = 1.473 +
-0.318x_i + e_i \] </span></p>
+0.318x_i + e_i
+\]</span>
+</div>
+
 <br>
-<p><span class = "math display">\[ \text{Parameter estimates} \colon \quad \beta_0 = 1.473 \quad \text{and}
-\quad \beta_1 = 0.113 \]</span></p>
+
+<div class="math-scroll-wrapper">
+<span class="math display">\[
+\text{Parameter estimates} \colon \quad \beta_0 = 1.473 \quad \text{and}
+\quad \beta_1 = 0.113
+\]</span>
+</div>
+
+<div class="table-responsive-wrapper">
 <table>
 <caption>ANOVA TABLE</caption>
 <colgroup>
-<col width="20%" />
-<col width="20%" />
-<col width="20%" />
-<col width="20%" />
-<col width="20%" />
+<col width="20%" /><col width="20%" /><col width="20%" /><col width="20%" /><col width="20%" />
 </colgroup>
 <thead>
 <tr class="header">
-<th>Source of Variation</th>
-<th>Degree of freedom</th>
-<th>Sum of Squares</th>
-<th>Mean Squares</th>
-<th>F-calculated</th>
+<th>Source of Variation</th><th>Degree of freedom</th>
+<th>Sum of Squares</th><th>Mean Squares</th><th>F-calculated</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>Regressor</td>
-<td>1</td>
-<td>1.449</td>
-<td>.1449</td>
-<td>2.665</td>
+<td>Regressor</td><td>1</td><td>1.449</td><td>.1449</td><td>2.665</td>
 </tr>
 <tr class="even">
-<td>Residual</td>
-<td>7</td>
-<td>3.806</td>
-<td>0.5437</td>
-<td></td>
+<td>Residual</td><td>7</td><td>3.806</td><td>0.5437</td><td></td>
 </tr>
 <tr class="odd">
-<td>Total</td>
-<td>8</td>
-<td>5.255</td>
-<td></td>
-<td></td>
+<td>Total</td><td>8</td><td>5.255</td><td></td><td></td>
 </tr>
 </tbody>
 </table>
-<p><span class="math display">\[\begin{align*}
-R^2 &amp; = \frac{SSR}{SST} \\
-R^2 &amp; = \frac{1.02}{4.91} \\
-R^2 &amp; = 0.207
-\end{align*}\]</span></p>
+</div>
+
+<div class="math-scroll-wrapper">
+<span class="math display">\[\begin{align*}
+R^2 & = \frac{SSR}{SST} \\
+R^2 & = \frac{1.02}{4.91} \\
+R^2 & = 0.207
+\end{align*}\]</span>
+</div>
+
 <p><span class="math inline">\(\Rightarrow \quad\)</span> <em>17.2% of
 variations in the y can be explained by the variations x</em></p>
 <p>We can safely conclude that the quadratic model is more accurate than
@@ -1814,10 +1973,26 @@ function bootstrapStylePandocTables() {
 }
 $(document).ready(function () {
   bootstrapStylePandocTables();
+
+  // Wrap every display-math mjx-container in a scroll wrapper
+  // (runs after MathJax has rendered)
+  function wrapMathJax() {
+    document.querySelectorAll('mjx-container[display="true"]').forEach(function(el) {
+      if (!el.parentElement.classList.contains('math-scroll-wrapper')) {
+        var wrapper = document.createElement('div');
+        wrapper.className = 'math-scroll-wrapper';
+        el.parentNode.insertBefore(wrapper, el);
+        wrapper.appendChild(el);
+      }
+    });
+  }
+
+  // MathJax 3 fires this event when typesetting is done
+  document.addEventListener('MathJax_done', wrapMathJax);
+  // Fallback: also run after a short delay
+  setTimeout(wrapMathJax, 2000);
 });
 </script>
-
-
 
 <!-- MathJax 3 -->
 <script>
@@ -1829,6 +2004,14 @@ $(document).ready(function () {
     },
     options: {
       skipHtmlTags: ['script','noscript','style','textarea','pre']
+    },
+    startup: {
+      ready() {
+        MathJax.startup.defaultReady();
+        MathJax.startup.promise.then(() => {
+          document.dispatchEvent(new Event('MathJax_done'));
+        });
+      }
     }
   };
 </script>
